@@ -17,12 +17,14 @@
 
   flex-direction: row;
   justify-content: space-between;
+  width: 1;
 }
 .skills-box {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding: 5%;
 }
 .box-1,
 .box-2 {
@@ -46,7 +48,23 @@ button {
   border-radius: 5%;
   box-shadow: 8px 5px 5px #665c47;
 }
+.attributes {
+  width: 100%;
+}
 
 .spacer {
   width: 20px;
+}
+.button {
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 2px;
+  text-align: left;
+}
+.button > span {
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.377) 3px 5px 5px;
+  border-radius: 20%;
+  float: right;
+  margin: 2px;
 }

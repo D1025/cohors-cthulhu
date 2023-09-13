@@ -14,33 +14,47 @@ export default class Sheet extends React.Component {
               <div className="spacer"></div>
               <div className="box-1">
                 <h2>
-                  Agility <button id="agi-value">0</button>
+                  <button id="agi-value" className="button">
+                    Agility <span>0</span>
+                  </button>
                 </h2>
 
                 <h2>
-                  Brawn <button id="brawn-value">0</button>
+                  <button id="brawn-value" className="button">
+                    Brawn<span>0</span>
+                  </button>
                 </h2>
 
                 <h2>
-                  Coordination <button id="coord-value">0</button>
+                  <button id="coord-value" className="button">
+                    Coordination <span>0</span>
+                  </button>
                 </h2>
               </div>
               <div className="spacer"></div>
               <div className="box-2">
                 <h2>
-                  Insight <button id="insight-value">0</button>
+                  <button id="insight-value" className="button">
+                    Insight <span>0</span>
+                  </button>
                 </h2>
 
                 <h2>
-                  Gravitas <button id="gravi-value">0</button>
+                  <button id="gravi-value" className="button">
+                    Gravitas <span>0</span>
+                  </button>
                 </h2>
 
                 <h2>
-                  Reason <button id="reason-value">0</button>
+                  <button id="reason-value" className="button">
+                    Reason <span>0</span>
+                  </button>
                 </h2>
 
                 <h2>
-                  Will <button id="will-value">0</button>
+                  <button id="will-value" className="button">
+                    Will <span>0</span>
+                  </button>
                 </h2>
               </div>
               <div className="spacer"></div>
