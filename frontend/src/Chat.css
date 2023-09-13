@@ -1,0 +1,7 @@
+.chat-box {
+  width: 30%;
+  border: 1px solid black;
+}
+#chat-name {
+  text-align: center;
+}
