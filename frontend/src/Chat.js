@@ -7,14 +7,24 @@ export default class Chat extends React.Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.state = {
       messages: props.messages,
+      input: "",
+      nickname: props.nickname || "",
     };
   }
   sendMessage() {
-    const message = { 1: "test" };
+    const message = {
+      type: "message",
+      nickname: this.props.nickname,
+      index: this.state.messages.length,
+      message: this.state.input,
+    };
     console.log(this.props.ws);
     this.props.ws.send(JSON.stringify(message));
+    this.setState({ input: "" });
   }
-
+  handleInputChange = (event) => {
+    this.setState({ input: event.target.value });
+  };
   render() {
     const { messages } = this.props;
     messages.map((messsage, index) => {
@@ -23,12 +33,25 @@ export default class Chat extends React.Component {
     return (
       <div className="chat-box">
         <h1 id="chat-name">CHAT</h1>
-        <ul>
-          {messages.map((message, index) => (
-            <li key={index}>{message[index]}</li>
-          ))}
+        <div className="break"></div>
+        <ul className="chat">
+          {messages.map((message, i) =>
+            i == 0 ? (
+              <h3>{message.message}</h3>
+            ) : (
+              <li key={i.index}>
+                {message.nickname}:{message.message}
+              </li>
+            )
+          )}
         </ul>
-        <div>
+        <div id="input-box">
+          <input
+            type="text"
+            placeholder="Enter message..."
+            value={this.state.input}
+            onChange={this.handleInputChange}
+          ></input>
           <button onClick={this.sendMessage}>Wyślij wiadomość</button>
         </div>
       </div>

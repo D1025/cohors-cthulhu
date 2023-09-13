@@ -1,14 +1,20 @@
 import { Component, useEffect, useState } from "react";
 import Chat from "./Chat";
 import Sheet from "./Sheet";
+import "./Wrapper.css";
 
 export default class Wrapper extends Component {
   constructor(props) {
     super(props);
+    this.handleNickInput = this.handleNickInput.bind(this);
+    this.setNickname = this.setNickname.bind(this);
     this.state = {
       ws: null,
       messages: [],
       isWebSocketOpen: false,
+      isNicknameSet: false,
+      inputNick: "",
+      nick: "",
     };
   }
   componentDidMount() {
@@ -16,17 +22,25 @@ export default class Wrapper extends Component {
 
     ws.addEventListener("open", () => {
       console.log("Connection established");
-      this.state.messages.push({ 0: "Connection established" });
+      const newMessage = {
+        index: 0,
+        message: "Connection established",
+      };
       this.setState({ isWebSocketOpen: true });
+      this.setState((prevState) => ({
+        messages: [...prevState.messages, newMessage],
+      }));
     });
     ws.addEventListener("message", (event) => {
       // Handle incoming messages
       const newMessage = JSON.parse(event.data);
 
       // Update state to add the new message
-      this.setState((prevState) => ({
-        messages: [...prevState.messages, newMessage],
-      }));
+      if (newMessage.type === "message") {
+        this.setState((prevState) => ({
+          messages: [...prevState.messages, newMessage],
+        }));
+      }
     });
 
     ws.addEventListener("close", () => {
@@ -58,14 +72,34 @@ export default class Wrapper extends Component {
       }
     }, 1);
   }
+  setNickname() {
+    this.setState({ nick: this.state.input });
+    this.setState({ isNicknameSet: true });
+  }
+  handleNickInput() {
+    this.setState({ input: this.state.input });
+  }
   render() {
     return (
       <div>
+        {this.state.isNicknameSet != true ? (
+          <div className="above nicknameset">
+            <input type="text" onChange={this.handleNickInput}></input>
+            <button onClick={this.setNickname}>Login</button>
+          </div>
+        ) : (
+          <div />
+        )}
+
         {this.state.isWebSocketOpen ? (
           // Render the component when WebSocket is open
           <div className="container box">
             <Sheet ws={this.state.ws} />
-            <Chat ws={this.state.ws} messages={this.state.messages} />
+            <Chat
+              ws={this.state.ws}
+              messages={this.state.messages}
+              nickname={this.state.nick}
+            />
           </div>
         ) : (
           // Render something else or a loading indicator
