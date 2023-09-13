@@ -1,3 +1,4 @@
+import json
 from autobahn.twisted.websocket import WebSocketServerFactory
 
 class AppWebSocketFactory(WebSocketServerFactory):
@@ -13,5 +14,6 @@ class AppWebSocketFactory(WebSocketServerFactory):
 
     def broadcast(self, message):
         for client in self.clients:
-            print(f"Wysyłanie do {client.peer}")
-            client.sendMessage(message.encode())
+            json_endode = json.dumps(message).encode('utf-8')
+            print(f"Wysyłanie {json_endode} do {client.peer}")
+            client.sendMessage(json_endode, isBinary=True)
