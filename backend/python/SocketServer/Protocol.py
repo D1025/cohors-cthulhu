@@ -2,7 +2,7 @@ import json
 from autobahn.twisted.websocket import WebSocketServerProtocol
 from twisted.python import log
 
-from backend.python.enums.JsonType import JsonType
+from enums.JsonType import JsonType
 
 class AppWebSocketProtocol(WebSocketServerProtocol):
     def onConnect(self, request):

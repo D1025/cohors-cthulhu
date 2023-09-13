@@ -1,12 +1,13 @@
-from sqlalchemy import ARRAY, UUID, Column, Enum, Integer, String, Uuid
+import uuid
+from sqlalchemy import UUID, Column, Enum, Integer, String
 
-from backend.python.enums.WeaponType import WeaponType
+from enums.WeaponType import WeaponType
 
-from backend.python.models.BaseDatabase import Base
+from models.BaseDatabase import Base
 
 class Weapons(Base):
     __tablename__ = 'weapons'
-    id = Column(UUID, primary_key=True, default=Uuid.uuid4, unique=True, nullable=False)
+    id = Column(Integer, primary_key=True, autoincrement=True) 
     name = Column(String)
     weaponType = Column(Enum(WeaponType))
     range = Column(String)
