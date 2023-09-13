@@ -6,61 +6,26 @@ export default class Chat extends React.Component {
     super(props);
     this.sendMessage = this.sendMessage.bind(this);
     this.state = {
-      ws: null,
-      messages: [],
+      messages: props.messages,
     };
   }
   sendMessage() {
-    const { ws } = this.state;
-    const message = { text: "test" };
-    ws.send(JSON.stringify(message));
-  }
-
-  componentDidMount() {
-    const ws = new WebSocket("ws://localhost:8080");
-
-    ws.addEventListener("open", () => {
-      console.log("WebSocket connection opened");
-      this.state.messages.push("Connected");
-      this.setState({ messages: this.state.messages });
-    });
-
-    ws.addEventListener("message", (event) => {
-      console.log("siusiak");
-      // Handle incoming messages
-      const newMessage = JSON.parse(event.data);
-
-      // Update state to add the new message
-      this.setState((prevState) => ({
-        messages: [...prevState.messages, newMessage],
-      }));
-    });
-
-    ws.addEventListener("close", () => {
-      console.log("WebSocket connection closed");
-
-      // You can implement reconnection logic here if needed
-    });
-
-    // Save the WebSocket instance in the component's state
-    this.setState({ ws });
-  }
-
-  componentWillUnmount() {
-    // Close the WebSocket connection when the component unmounts
-    if (this.state.ws) {
-      this.state.ws.close();
-    }
+    const message = { 1: "test" };
+    console.log(this.props.ws);
+    this.props.ws.send(JSON.stringify(message));
   }
 
   render() {
-    const { messages } = this.state;
+    const { messages } = this.props;
+    messages.map((messsage, index) => {
+      console.log(messsage);
+    });
     return (
       <div className="chat-box">
         <h1 id="chat-name">CHAT</h1>
         <ul>
           {messages.map((message, index) => (
-            <li key={index}>{message}</li>
+            <li key={index}>{message[index]}</li>
           ))}
         </ul>
         <div>

@@ -2,6 +2,17 @@ import React from "react";
 import "./Sheet.css";
 
 export default class Sheet extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      agi: 0,
+    };
+    this.sendState = this.sendState.bind(this);
+  }
+  sendState(e) {
+    console.log(e.target.value);
+    console.log(e.target.innerHTML.split(" ")[0]);
+  }
   render() {
     return (
       <div>
@@ -14,8 +25,13 @@ export default class Sheet extends React.Component {
               <div className="spacer"></div>
               <div className="box-1">
                 <h2>
-                  <button id="agi-value" className="button">
-                    Agility <span>0</span>
+                  <button
+                    onClick={this.sendState}
+                    id="agi-value"
+                    className="button"
+                    value={this.state.agi}
+                  >
+                    Agility <span>{this.state.agi}</span>
                   </button>
                 </h2>
 
