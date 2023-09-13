@@ -11,14 +11,21 @@ export default class Chat extends React.Component {
       nickname: props.nickname || "",
     };
   }
+  componentDidUpdate(prevProps) {
+    // Check if props.nickname has changed and update the state accordingly
+    if (this.props.nickname !== prevProps.nickname) {
+      this.setState({ nickname: this.props.nickname });
+    }
+  }
   sendMessage() {
+    this.forceUpdate();
     const message = {
       type: "message",
-      nickname: this.state.nickname,
+      nickname: this.state.nickname, // Use this.state.nickname
       index: this.state.messages.length,
       message: this.state.input,
     };
-    console.log(message);
+    console.log(this.state.nickname);
     this.props.ws.send(JSON.stringify(message));
     this.setState({ input: "" });
   }
@@ -40,7 +47,7 @@ export default class Chat extends React.Component {
               <h3>{message.message}</h3>
             ) : (
               <li key={i.index}>
-                {message.nickname}:{message.message}
+                {this.props.nickname}:{message.message}
               </li>
             )
           )}

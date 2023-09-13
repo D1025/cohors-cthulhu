@@ -3,11 +3,9 @@ import Chat from "./Chat";
 import Sheet from "./Sheet";
 import "./Wrapper.css";
 
-export default class Wrapper extends Component {
+class Wrapper extends Component {
   constructor(props) {
     super(props);
-    this.handleNickInput = this.handleNickInput.bind(this);
-    this.setNickname = this.setNickname.bind(this);
     this.state = {
       ws: null,
       messages: [],
@@ -74,36 +72,37 @@ export default class Wrapper extends Component {
       }
     }, 1);
   }
-  setNickname() {
-    this.setState({ nick: this.state.input });
+  setNickname = () => {
+    this.setState({ nick: this.state.inputNick });
     this.setState({ isNicknameSet: true });
-  }
-  handleNickInput() {
-    this.setState({ input: this.state.input });
-  }
+  };
+
+  handleNickInput = (event) => {
+    this.setState({ inputNick: event.target.value });
+  };
   render() {
     return (
       <div>
-        {this.state.isNicknameSet != true ? (
+        {!this.state.isNicknameSet ? (
           <div className="above nicknameset">
             <input type="text" onChange={this.handleNickInput}></input>
             <button onClick={this.setNickname}>Login</button>
           </div>
         ) : this.state.isWebSocketOpen ? (
-          // Render the component when WebSocket is open
           <div className="container box">
             <Sheet ws={this.state.ws} />
             <Chat
               ws={this.state.ws}
               messages={this.state.messages}
-              nickname={this.state.inputNick}
+              nickname={this.state.nick} // Pass nick as the nickname prop
             />
           </div>
         ) : (
-          // Render something else or a loading indicator
           <p>Connecting to WebSocket...</p>
         )}
       </div>
     );
   }
 }
+
+export default Wrapper;
