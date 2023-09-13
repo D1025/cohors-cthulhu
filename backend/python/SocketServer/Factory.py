@@ -16,4 +16,4 @@ class AppWebSocketFactory(WebSocketServerFactory):
         for client in self.clients:
             json_endode = json.dumps(message).encode('utf-8')
             print(f"Wysyłanie {json_endode} do {client.peer}")
-            client.sendMessage(json_endode, isBinary=True)
+            client.sendMessage(json_endode)
