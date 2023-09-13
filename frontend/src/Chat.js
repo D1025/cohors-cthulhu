@@ -14,11 +14,11 @@ export default class Chat extends React.Component {
   sendMessage() {
     const message = {
       type: "message",
-      nickname: this.props.nickname,
+      nickname: this.state.nickname,
       index: this.state.messages.length,
       message: this.state.input,
     };
-    console.log(this.props.ws);
+    console.log(message);
     this.props.ws.send(JSON.stringify(message));
     this.setState({ input: "" });
   }

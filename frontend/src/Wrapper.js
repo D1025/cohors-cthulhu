@@ -33,7 +33,9 @@ export default class Wrapper extends Component {
     });
     ws.addEventListener("message", (event) => {
       // Handle incoming messages
+      console.log(event.data);
       const newMessage = JSON.parse(event.data);
+      console.log(newMessage);
 
       // Update state to add the new message
       if (newMessage.type === "message") {
@@ -87,18 +89,14 @@ export default class Wrapper extends Component {
             <input type="text" onChange={this.handleNickInput}></input>
             <button onClick={this.setNickname}>Login</button>
           </div>
-        ) : (
-          <div />
-        )}
-
-        {this.state.isWebSocketOpen ? (
+        ) : this.state.isWebSocketOpen ? (
           // Render the component when WebSocket is open
           <div className="container box">
             <Sheet ws={this.state.ws} />
             <Chat
               ws={this.state.ws}
               messages={this.state.messages}
-              nickname={this.state.nick}
+              nickname={this.state.inputNick}
             />
           </div>
         ) : (
