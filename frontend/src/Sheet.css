@@ -1,0 +1,52 @@
+.attr-name {
+  background-color: rgba(255, 0, 0, 0.559);
+  border-radius: 4%;
+  border: 1px solid rgba(0, 0, 0, 0.364);
+}
+.CharacterSheet {
+  /* background-color: #e0c9a6; */
+  background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
+  background-color: rgba(128, 128, 128, 0.016);
+  background-blend-mode: multiply;
+  box-shadow: 10px 5px 5px #b6a283;
+  border-radius: 5%;
+  font-family: "Roboto Mono", monospace;
+}
+.attributes-box {
+  display: flex;
+
+  flex-direction: row;
+  justify-content: space-between;
+}
+.skills-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.box-1,
+.box-2 {
+  flex-direction: column;
+}
+.attributes-box > .box-1 > h2,
+.attributes-box > .box-2 > h2 {
+  background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
+  background-color: #cdba9e03;
+  background-blend-mode: multiply;
+  border-radius: 5%;
+  box-shadow: 8px 5px 5px #665c47;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+button {
+  background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
+  background-color: #cdba9e03;
+  background-blend-mode: multiply;
+  border-radius: 5%;
+  box-shadow: 8px 5px 5px #665c47;
+}
+
+.spacer {
+  width: 20px;
+}
