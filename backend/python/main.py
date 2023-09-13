@@ -4,9 +4,10 @@ from twisted.internet.endpoints import TCP4ServerEndpoint
 from SocketServer.Factory import AppWebSocketFactory
 from SocketServer.Protocol import AppWebSocketProtocol
 
+
 from decouple import config
 
-from backend.resources.database.InitDatabase import create_database
+from database.InitDatabase import create_database
 
 if __name__ == '__main__':
     create_database()

@@ -1,10 +1,11 @@
-from sqlalchemy import ARRAY, UUID, Column, ForeignKey, Integer, String, Uuid
+import uuid
+from sqlalchemy import UUID, Column, ForeignKey, Integer, String
 
-from backend.python.models.BaseDatabase import Base
+from models.BaseDatabase import Base
 
 class Equipment(Base):
     __tablename__ = 'equipment'
-    id = Column(UUID, primary_key=True, default=Uuid.uuid4, unique=True, nullable=False)
+    id = Column(Integer, primary_key=True, autoincrement=True)     
     name = Column(String)
     description = Column(String)
-    characterId = Column(UUID, ForeignKey('character_sheet.id'))
+    characterId = Column(Integer, ForeignKey('character_sheet.id'))
