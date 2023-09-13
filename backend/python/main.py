@@ -6,7 +6,11 @@ from SocketServer.Protocol import AppWebSocketProtocol
 
 from decouple import config
 
+from backend.resources.database.InitDatabase import create_database
+
 if __name__ == '__main__':
+    create_database()
+    
     factory = AppWebSocketFactory(f"{config('FACTORY_SOCKET')}:{config('FACTORY_PORT')}")
     factory.protocol = AppWebSocketProtocol
 
