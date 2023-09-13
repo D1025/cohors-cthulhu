@@ -1,14 +1,18 @@
 import { Component, useEffect, useState } from "react";
 import Chat from "./Chat";
 import Sheet from "./Sheet";
+import "./Wrapper.css";
 
-export default class Wrapper extends Component {
+class Wrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ws: null,
       messages: [],
       isWebSocketOpen: false,
+      isNicknameSet: false,
+      inputNick: "",
+      nick: "",
     };
   }
   componentDidMount() {
@@ -16,17 +20,27 @@ export default class Wrapper extends Component {
 
     ws.addEventListener("open", () => {
       console.log("Connection established");
-      this.state.messages.push({ 0: "Connection established" });
+      const newMessage = {
+        index: 0,
+        message: "Connection established",
+      };
       this.setState({ isWebSocketOpen: true });
-    });
-    ws.addEventListener("message", (event) => {
-      // Handle incoming messages
-      const newMessage = JSON.parse(event.data);
-
-      // Update state to add the new message
       this.setState((prevState) => ({
         messages: [...prevState.messages, newMessage],
       }));
+    });
+    ws.addEventListener("message", (event) => {
+      // Handle incoming messages
+      console.log(event.data);
+      const newMessage = JSON.parse(event.data);
+      console.log(newMessage);
+
+      // Update state to add the new message
+      if (newMessage.type === "message") {
+        this.setState((prevState) => ({
+          messages: [...prevState.messages, newMessage],
+        }));
+      }
     });
 
     ws.addEventListener("close", () => {
@@ -58,20 +72,37 @@ export default class Wrapper extends Component {
       }
     }, 1);
   }
+  setNickname = () => {
+    this.setState({ nick: this.state.inputNick });
+    this.setState({ isNicknameSet: true });
+  };
+
+  handleNickInput = (event) => {
+    this.setState({ inputNick: event.target.value });
+  };
   render() {
     return (
       <div>
-        {this.state.isWebSocketOpen ? (
-          // Render the component when WebSocket is open
+        {!this.state.isNicknameSet ? (
+          <div className="above nicknameset">
+            <input type="text" onChange={this.handleNickInput}></input>
+            <button onClick={this.setNickname}>Login</button>
+          </div>
+        ) : this.state.isWebSocketOpen ? (
           <div className="container box">
             <Sheet ws={this.state.ws} />
-            <Chat ws={this.state.ws} messages={this.state.messages} />
+            <Chat
+              ws={this.state.ws}
+              messages={this.state.messages}
+              nickname={this.state.nick} // Pass nick as the nickname prop
+            />
           </div>
         ) : (
-          // Render something else or a loading indicator
           <p>Connecting to WebSocket...</p>
         )}
       </div>
     );
   }
 }
+
+export default Wrapper;
