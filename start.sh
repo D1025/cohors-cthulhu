@@ -9,9 +9,7 @@ fi
 
 python backend/python/main.py &
 
-echo $! > server_pid.txt &
-
-npm --prefix ./frontend run start
+echo $! > server_pid.txt
 
 echo "Serwer został uruchomiony."
 
