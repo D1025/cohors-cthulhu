@@ -47,7 +47,7 @@ export default class Chat extends React.Component {
               <h3>{message.message}</h3>
             ) : (
               <li key={i.index}>
-                {this.props.nickname}:{message.message}
+                {message.nickname}: {message.message}
               </li>
             )
           )}
