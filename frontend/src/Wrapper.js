@@ -19,7 +19,7 @@ class Wrapper extends Component {
     const ws = new WebSocket("ws://localhost:8080");
 
     ws.addEventListener("open", () => {
-      console.log("Connection established");
+
       const newMessage = {
         index: 0,
         message: "Connection established",
@@ -31,9 +31,9 @@ class Wrapper extends Component {
     });
     ws.addEventListener("message", (event) => {
       // Handle incoming messages
-      console.log(event.data);
+
       const newMessage = JSON.parse(event.data);
-      console.log(newMessage);
+
 
       // Update state to add the new message
       if (newMessage.type === "message") {
@@ -90,7 +90,10 @@ class Wrapper extends Component {
           </div>
         ) : this.state.isWebSocketOpen ? (
           <div className="container box">
-            <Sheet ws={this.state.ws} />
+            <Sheet
+                ws={this.state.ws}
+                nickname={this.state.nick}
+            />
             <Chat
               ws={this.state.ws}
               messages={this.state.messages}
