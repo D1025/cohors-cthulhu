@@ -25,7 +25,6 @@ export default class Chat extends React.Component {
       index: this.state.messages.length,
       message: this.state.input,
     };
-    console.log(this.state.nickname);
     this.props.ws.send(JSON.stringify(message));
     this.setState({ input: "" });
   }
@@ -35,7 +34,6 @@ export default class Chat extends React.Component {
   render() {
     const { messages } = this.props;
     messages.map((messsage, index) => {
-      console.log(messsage);
     });
     return (
       <div className="chat-box">
