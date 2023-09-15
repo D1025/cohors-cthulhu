@@ -1,5 +1,7 @@
-import uuid
-from sqlalchemy import UUID, Column, Enum, Integer, String
+from sqlalchemy import Column, Enum, Integer, String
+from sqlalchemy.orm import relationship
+
+from models.CharacterSheet import character_weapons_association
 
 from enums.WeaponType import WeaponType
 
@@ -13,3 +15,15 @@ class Weapons(Base):
     range = Column(String)
     damage = Column(Integer)
     effects = Column(String)
+    
+    characterSheet = relationship("CharacterSheet", secondary=character_weapons_association, back_populates="weapons")
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'weaponType': self.weaponType.value if self.weaponType else None,  # Enum wartość
+            'range': self.range,
+            'damage': self.damage,
+            'effects': self.effects
+        }

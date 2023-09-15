@@ -1,5 +1,5 @@
-import uuid
-from sqlalchemy import UUID, Column, Integer
+from sqlalchemy import Column, Integer
+from sqlalchemy.orm import relationship
 
 from models.BaseDatabase import Base
 
@@ -13,3 +13,18 @@ class Attributes(Base):
     insight = Column(Integer)
     reason = Column(Integer)
     will = Column(Integer)
+    
+    characterSheet = relationship("CharacterSheet", back_populates="attributes")
+    
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'agility': self.agility,
+            'brawn': self.brawn,
+            'coordination': self.coordination,
+            'gravitas': self.gravitas,
+            'insight': self.insight,
+            'reason': self.reason,
+            'will': self.will
+        }
