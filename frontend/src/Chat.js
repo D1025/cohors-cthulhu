@@ -27,10 +27,16 @@ export default class Chat extends React.Component {
     };
     this.props.ws.send(JSON.stringify(message));
     this.setState({ input: "" });
+    return false;
   }
   handleInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
+  handleEnterPress = (e) =>{
+    if(e.key === 'Enter'){
+      this.sendMessage()
+    }
+  }
   render() {
     const { messages } = this.props;
     messages.map((messsage, index) => {
@@ -56,8 +62,9 @@ export default class Chat extends React.Component {
             placeholder="Enter message..."
             value={this.state.input}
             onChange={this.handleInputChange}
+            onKeyDown={this.handleEnterPress}
           ></input>
-          <button onClick={this.sendMessage}>Wyślij wiadomość</button>
+          <button  onClick={this.sendMessage}>Wyślij wiadomość</button>
         </div>
       </div>
     );

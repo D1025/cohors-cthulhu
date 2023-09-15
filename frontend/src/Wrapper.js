@@ -80,12 +80,17 @@ class Wrapper extends Component {
   handleNickInput = (event) => {
     this.setState({ inputNick: event.target.value });
   };
+  handleEnterPress = (e) =>{
+    if(e.key === 'Enter'){
+      this.setNickname()
+    }
+  }
   render() {
     return (
       <div>
         {!this.state.isNicknameSet ? (
           <div className="above nicknameset">
-            <input type="text" onChange={this.handleNickInput}></input>
+            <input type="text" onChange={this.handleNickInput} onKeyDown={this.handleEnterPress}></input>
             <button onClick={this.setNickname}>Login</button>
           </div>
         ) : this.state.isWebSocketOpen ? (
