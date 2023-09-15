@@ -112,7 +112,7 @@ export default class Sheet extends React.Component {
                                     className="button"
                                     value={this.state.will}
                                 >
-                                    Will <span>0</span>
+                                    Will <span>{this.state.will}</span>
                                 </button>
                             </h2>
                         </div>
