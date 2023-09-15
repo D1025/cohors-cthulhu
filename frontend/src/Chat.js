@@ -50,9 +50,22 @@ export default class Chat extends React.Component {
             i == 0 ? (
               <h3>{message.message}</h3>
             ) : (
-              <li key={i.index}>
-                {message.nickname}: {message.message}
-              </li>
+                message.nickname === this.props.nickname ? (
+                <div className={"author-message"}>
+                  <li key={i.index}>
+                  {message.nickname}: {message.message}
+                  </li>
+                  <div className={"chat-spacer"}></div>
+                </div>
+                ) :
+                    (
+                        <div className={"someone-message"}>
+                          <li key={i.index}>
+                            {message.nickname}: {message.message}
+                          </li>
+                          <div className={"chat-spacer"}></div>
+                        </div>
+                    )
             )
           )}
         </ul>
@@ -64,7 +77,7 @@ export default class Chat extends React.Component {
             onChange={this.handleInputChange}
             onKeyDown={this.handleEnterPress}
           ></input>
-          <button  onClick={this.sendMessage}>Wyślij wiadomość</button>
+          <button  onClick={this.sendMessage}>Send</button>
         </div>
       </div>
     );
