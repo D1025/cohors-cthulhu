@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="570685a9-76ac-4537-9c71-4284a4c98c24" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/src/Chat.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Chat.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Chat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server_pid.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server_pid.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1694737199190</updated>
       <workItem from="1694737200339" duration="3054000" />
-      <workItem from="1694793437194" duration="2793000" />
+      <workItem from="1694793437194" duration="2831000" />
     </task>
     <servers />
   </component>
