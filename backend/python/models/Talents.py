@@ -6,7 +6,7 @@ from models.CharacterSheet import character_talents_association
 from models.BaseDatabase import Base
 
 class Talents(Base):
-    __tablename__ = 'talents'
+    __tablename__ = "talents"
     id = Column(Integer, primary_key=True, autoincrement=True) 
     name = Column(String)
     description = Column(String)
@@ -15,7 +15,7 @@ class Talents(Base):
     
     def to_dict(self):
         return {
-            'id': self.id,
-            'name': self.name,
-            'description': self.description
+            "id": self.id,
+            "name": self.name,
+            "description": self.description
         }
