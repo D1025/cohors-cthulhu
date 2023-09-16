@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from models.BaseDatabase import Base
 
 class Attributes(Base):
-    __tablename__ = 'attributes'
+    __tablename__ = "attributes"
     id = Column(Integer, primary_key=True, autoincrement=True)    
     agility = Column(Integer)
     brawn = Column(Integer)
@@ -19,12 +19,12 @@ class Attributes(Base):
     
     def to_dict(self):
         return {
-            'id': self.id,
-            'agility': self.agility,
-            'brawn': self.brawn,
-            'coordination': self.coordination,
-            'gravitas': self.gravitas,
-            'insight': self.insight,
-            'reason': self.reason,
-            'will': self.will
+            "id": self.id,
+            "agility": self.agility,
+            "brawn": self.brawn,
+            "coordination": self.coordination,
+            "gravitas": self.gravitas,
+            "insight": self.insight,
+            "reason": self.reason,
+            "will": self.will
         }
