@@ -43,9 +43,12 @@ export default class Sheet extends React.Component {
             survivalChecked: false,
             tactics: 0,
             tacticsChecked: false,
+            focusChecked: false,
+            dice: 1,
         };
         this.buttonClickedAttr = this.buttonClickedAttr.bind(this);
-        this.buttonClickedSkill = this.buttonClickedSkill.bind(this)
+        this.buttonClickedSkill = this.buttonClickedSkill.bind(this);
+        this.handleFocusChange = this.handleFocusChange.bind(this);
     }
 
     buttonClickedAttr(e) {
@@ -332,6 +335,113 @@ export default class Sheet extends React.Component {
         }
         console.log(this.state.academiaChecked)
     }
+    handleFocusChange = () => {
+        this.setState((prevState)=>({
+            focusChecked: !prevState.focusChecked,
+        }))
+    }
+    handleSubmitRoll = ()=>{
+        let skill = "";
+        let skillVal = 0;
+        let attribute = "";
+        let attrVal = 0;
+        if (this.state.agiChecked){
+            attribute = "agility";
+            attrVal = this.state.agi;
+        }
+        else if(this.state.brawnChecked){
+            attribute = "brawn";
+            attrVal = this.state.brawn;
+        }
+        else if(this.state.coordChecked){
+            attribute = "coordination";
+            attrVal = this.state.coord;
+        }
+        else if(this.state.insightChecked){
+            attribute = "insight";
+            attrVal = this.state.insight;
+        }
+        else if(this.state.gravitasChecked){
+            attribute = "gravitas";
+            attrVal = this.state.gravitas;
+        }
+        else if(this.state.reasonChecked){
+            attribute = "reason";
+            attrVal = this.state.reason;
+        }
+        else if(this.state.willChecked){
+            attribute = "will";
+            attrVal = this.state.will;
+        }
+        else{
+            alert("No skill checked");
+            return;
+        }
+        if(this.state.academiaChecked){
+            skill = "academia";
+            skillVal = this.state.academia;
+        }
+        else if(this.state.athleticsChecked){
+            skill = "athletics";
+            skillVal = this.state.athletics;
+        }
+        else if(this.state.craftingChecked){
+            skill = "crafting";
+            skillVal = this.state.crafting;
+        }
+        else if(this.state.engineeringChecked){
+            skill = "engineering";
+            skillVal = this.state.engineering;
+        }
+        else if(this.state.medicineChecked){
+            skill = "medicine";
+            skillVal = this.state.medicine;
+        }
+        else if(this.state.observationChecked){
+            skill = "observation";
+            skillVal = this.state.observation;
+        }
+        else if(this.state.persuasionChecked){
+            skill = "persuasion";
+            skillVal = this.state.persuasion;
+        }
+        else if(this.state.resilienceChecked){
+            skill = "resilience";
+            skillVal = this.state.resilience;
+        }
+        else if(this.state.stealthChecked){
+            skill = "stealth";
+            skillVal = this.state.stealth;
+        }
+        else if(this.state.survivalChecked){
+            skill = "survival";
+            skillVal = this.state.survival;
+        }
+        else if(this.state.tacticsChecked){
+            skill = "tactics";
+            skillVal = this.state.tactics;
+        }
+        else{
+            alert("Skill not checked");
+            return;
+        }
+        let message = {
+            type: "roll",
+            nickname: this.props.nickname,
+            dice: this.state.dice,
+            focus: this.state.focusChecked,
+            attribute: attribute,
+            attributeValue: attrVal,
+            skill: skill,
+            skillValue: skillVal,
+        }
+        this.props.ws.send(JSON.stringify(message))
+    }
+    handledice = (e)=>{
+        this.setState((prevState) => ({
+            dice: e.target.value,
+        }))
+    }
     render() {
         return (<div className={"entire"}>
             <div className="CharacterSheet">
@@ -513,12 +623,25 @@ export default class Sheet extends React.Component {
 
                     </div>
                     </div>
-
-                    <div className="form-check form-switch focus-box">
-                        <label className="form-check-label" >Focus</label>
-                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-
+                    <div className={"dice-box"}>
+                        <label className="form-check-label" >Dice </label>
+                        <select value={this.state.dice} onChange={this.handledice} className="form-select" aria-label="Wybierz ilosc kosci">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value={"4"}>4</option>
+                            <option value={"5"}>5</option>
+                        </select>
                     </div>
+                    <div className={"box-dice-focus"}>
+                    <div className="form-check form-switch focus-box focus">
+                        <label className="form-check-label" >Focus  </label>
+                        <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={this.state.focusChecked} onChange={this.handleFocusChange} />
+
+                        <button className={"btn btn-dark"} onClick={this.handleSubmitRoll}>Send</button>
+                    </div>
+
+                </div>
                 </div>
             </div>
         </div>);

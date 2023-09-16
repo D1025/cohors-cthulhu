@@ -59,7 +59,7 @@ button {
   width: 5vh;
 }
 .button {
-  font-size: 4vh;
+  font-size: 3vh;
   flex-wrap: nowrap;
   width: 100%;
   margin: 2px;
@@ -78,6 +78,22 @@ button {
   background-blend-mode: multiply;
 }
 .focus-box{
+
+}
+.focus{
+  display: flex !important;
+  flex-direction: column;
+  justify-items: center;
   align-items: center;
-  margin-left: 14vw;
+}
+#flexSwitchCheckDefault {
+  margin-left: 0.5%;
+  margin-bottom: 1%;
+}
+.dice-box{
+  display: flex !important;
+  flex-direction: column;
+  text-align: center;
+  width: 36vh;
+  padding-left: 28vh;
 }
