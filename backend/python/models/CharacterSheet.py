@@ -42,6 +42,7 @@ class CharacterSheet(Base):
     maxStress = Column(Integer)
     actualInjuries = Column(Integer)
     maxInjuries = Column(Integer)
+    fatigue = Column(Integer)
     armour = Column(Integer)
     courage = Column(Integer)
     caste = Column(String)
@@ -83,6 +84,7 @@ class CharacterSheet(Base):
             "maxStress": self.maxStress,
             "actualInjuries": self.actualInjuries,
             "maxInjuries": self.maxInjuries,
+            "fatigue": self.fatigue,
             "armour": self.armour,
             "courage": self.courage,
             "languages": self.languages,

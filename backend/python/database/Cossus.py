@@ -147,6 +147,7 @@ Cossus is young but has seen some real action and has participated in some diffi
             maxStress=15,
             actualInjuries=0,
             maxInjuries=4,
+            fatigue=0,
             armour=5,
             courage=0,
             languages="Latin, Greek (simple conversations), Punic",
