@@ -19,7 +19,7 @@ class Wrapper extends Component {
     const ws = new WebSocket("ws://localhost:8080");
 
     ws.addEventListener("open", () => {
-      console.log("Connection established");
+
       const newMessage = {
         index: 0,
         message: "Connection established",
@@ -31,9 +31,9 @@ class Wrapper extends Component {
     });
     ws.addEventListener("message", (event) => {
       // Handle incoming messages
-      console.log(event.data);
+
       const newMessage = JSON.parse(event.data);
-      console.log(newMessage);
+
 
       // Update state to add the new message
       if (newMessage.type === "message") {
@@ -80,17 +80,25 @@ class Wrapper extends Component {
   handleNickInput = (event) => {
     this.setState({ inputNick: event.target.value });
   };
+  handleEnterPress = (e) =>{
+    if(e.key === 'Enter'){
+      this.setNickname()
+    }
+  }
   render() {
     return (
       <div>
         {!this.state.isNicknameSet ? (
           <div className="above nicknameset">
-            <input type="text" onChange={this.handleNickInput}></input>
+            <input type="text" onChange={this.handleNickInput} onKeyDown={this.handleEnterPress}></input>
             <button onClick={this.setNickname}>Login</button>
           </div>
         ) : this.state.isWebSocketOpen ? (
           <div className="container box">
-            <Sheet ws={this.state.ws} />
+            <Sheet
+                ws={this.state.ws}
+                nickname={this.state.nick}
+            />
             <Chat
               ws={this.state.ws}
               messages={this.state.messages}

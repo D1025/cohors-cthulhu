@@ -1,9 +1,12 @@
+
+
 .attr-name {
   background-color: rgba(255, 0, 0, 0.559);
   border-radius: 4%;
   border: 1px solid rgba(0, 0, 0, 0.364);
 }
 .CharacterSheet {
+
   /* background-color: #e0c9a6; */
   background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
   background-color: rgba(128, 128, 128, 0.016);
@@ -17,19 +20,19 @@
 
   flex-direction: row;
   justify-content: space-between;
-  width: 1;
+
 }
 .skills-box {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 5%;
+  padding: 3%;
 }
 .box-1,
 .box-2 {
   flex-direction: column;
 }
+
 .attributes-box > .box-1 > h2,
 .attributes-box > .box-2 > h2 {
   background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
@@ -53,9 +56,10 @@ button {
 }
 
 .spacer {
-  width: 20px;
+  width: 5vh;
 }
 .button {
+  font-size: 3vh;
   flex-wrap: nowrap;
   width: 100%;
   margin: 2px;
@@ -67,4 +71,29 @@ button {
   border-radius: 20%;
   float: right;
   margin: 2px;
+}
+.checked {
+  border: #770ccb solid 3px;
+  background-color: rgba(40, 44, 52, 0.1);
+  background-blend-mode: multiply;
+}
+.focus-box{
+
+}
+.focus{
+  display: flex !important;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+#flexSwitchCheckDefault {
+  margin-left: 0.5%;
+  margin-bottom: 1%;
+}
+.dice-box{
+  display: flex !important;
+  flex-direction: column;
+  text-align: center;
+  width: 36vh;
+  padding-left: 28vh;
 }

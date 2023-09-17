@@ -25,17 +25,21 @@ export default class Chat extends React.Component {
       index: this.state.messages.length,
       message: this.state.input,
     };
-    console.log(this.state.nickname);
     this.props.ws.send(JSON.stringify(message));
     this.setState({ input: "" });
+    return false;
   }
   handleInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
+  handleEnterPress = (e) =>{
+    if(e.key === 'Enter'){
+      this.sendMessage()
+    }
+  }
   render() {
     const { messages } = this.props;
     messages.map((messsage, index) => {
-      console.log(messsage);
     });
     return (
       <div className="chat-box">
@@ -46,9 +50,22 @@ export default class Chat extends React.Component {
             i == 0 ? (
               <h3>{message.message}</h3>
             ) : (
-              <li key={i.index}>
-                {this.props.nickname}:{message.message}
-              </li>
+                message.nickname === this.props.nickname ? (
+                <div className={"author-message"}>
+                  <li key={i.index}>
+                  {message.nickname}: {message.message}
+                  </li>
+                  <div className={"chat-spacer"}></div>
+                </div>
+                ) :
+                    (
+                        <div className={"someone-message"}>
+                          <li key={i.index}>
+                            {message.nickname}: {message.message}
+                          </li>
+                          <div className={"chat-spacer"}></div>
+                        </div>
+                    )
             )
           )}
         </ul>
@@ -58,8 +75,9 @@ export default class Chat extends React.Component {
             placeholder="Enter message..."
             value={this.state.input}
             onChange={this.handleInputChange}
+            onKeyDown={this.handleEnterPress}
           ></input>
-          <button onClick={this.sendMessage}>Wyślij wiadomość</button>
+          <button  onClick={this.sendMessage}>Send</button>
         </div>
       </div>
     );
