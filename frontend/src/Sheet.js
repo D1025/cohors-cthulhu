@@ -45,6 +45,9 @@ export default class Sheet extends React.Component {
             tacticsChecked: false,
             focusChecked: false,
             dice: 1,
+            data: null,
+            isLoading: true,
+            error: null,
         };
         this.buttonClickedAttr = this.buttonClickedAttr.bind(this);
         this.buttonClickedSkill = this.buttonClickedSkill.bind(this);
@@ -437,11 +440,39 @@ export default class Sheet extends React.Component {
         }
         this.props.ws.send(JSON.stringify(message))
     }
+
     handledice = (e)=>{
         this.setState((prevState) => ({
             dice: e.target.value,
         }))
     }
+    componentDidMount() {
+        fetch(`http://localhost:8086/character?name=${this.props.nickname}`,{
+            mode: 'no-cors',
+            method: 'get'
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({
+                    data: data,
+                    isLoading: false,
+                    error: null,
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    error: error,
+                    isLoading: false,
+                });
+            });
+        console.log(this.state.data)
+    }
+
     render() {
         return (<div className={"entire"}>
             <div className="CharacterSheet">

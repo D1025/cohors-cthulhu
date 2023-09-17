@@ -21,8 +21,10 @@ from models.Equipment import Equipment
 from models.Skills import Focus, Skills
 from models.Truths import Truths
 
+from decouple import config
+
 def create_database():
-    engine = create_engine('sqlite:///mydatabase.sqlite')
+    engine = create_engine(config('DATABASE_URL'))
     Session = sessionmaker(bind=engine)
     session = Session()
     inspector = inspect(engine)
