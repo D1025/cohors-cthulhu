@@ -17,6 +17,7 @@ from database.Akusaa import add_akussa_character_sheet
 from database.Edigo import add_egino_character_sheet
 from database.Cossus import add_cossus_character_sheet
 from database.Herodion import add_herodion_character_sheet
+from database.Verodu import add_verodu_character_sheet
 
 from decouple import config
 
@@ -76,6 +77,16 @@ def create_database():
         character_sheet = session.query(CharacterSheet).filter_by(name = "Herodion").first()
         with open("herodion.json", "w") as json_file:
             json.dump(character_sheet.to_dict(), json_file)
+            
+        #VERODU
+        exists_query = session.query(exists().where(CharacterSheet.name == "Verodu"))
+        if not session.execute(exists_query).scalar():
+            add_verodu_character_sheet(session)
+            
+        character_sheet = session.query(CharacterSheet).filter_by(name = "Verodu").first()
+        with open("verodu.json", "w") as json_file:
+            json.dump(character_sheet.to_dict(), json_file)
+
 
         
     except Exception as e:

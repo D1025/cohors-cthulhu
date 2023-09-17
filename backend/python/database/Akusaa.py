@@ -169,6 +169,7 @@ She has had some small brushes with the supernatural, particularly in her dreams
             maxStress=11,
             actualInjuries=0,
             maxInjuries=3,
+            fatigue=0,
             armour=0,
             courage=2,
             languages=" Coptic, Aramaic, Celtic, Germanic, Greek, Latin, Punic",

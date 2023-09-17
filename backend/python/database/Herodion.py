@@ -166,6 +166,7 @@ Key to turning his fortunes around in Colonia was garnering the attention of a s
             maxStress=11,
             actualInjuries=0,
             maxInjuries=3,
+            fatigue=0,
             armour=1,
             courage=0,
             languages="Greek, Latin (conversational)",

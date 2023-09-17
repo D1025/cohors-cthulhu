@@ -156,6 +156,7 @@ Though he might have been more physically formidable in his youth, Egino has sin
             maxStress=16,
             actualInjuries=0,
             maxInjuries=3,
+            fatigue=0,
             armour=1,
             courage=2,
             languages="Germanic, Celtic, Latin (just enough to get by)",
