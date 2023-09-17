@@ -3,5 +3,6 @@
     "twisted-iocpsupport": "1.0.4",
     "autobahn": "23.6.2",
     "websocket": "0.2.1",
-    "python-decouple": "3.8"
+    "python-decouple": "3.8",
+    "SQLAlchemy": "2.0.20"
 }
