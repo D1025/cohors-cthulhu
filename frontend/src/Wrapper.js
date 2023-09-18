@@ -41,6 +41,26 @@ class Wrapper extends Component {
           messages: [...prevState.messages, newMessage],
         }));
       }
+      if(newMessage.type  === "damage"){
+        let messageContent = `dmg: ${newMessage.damage} effects: ${newMessage.effects} ` + `<${newMessage.rolls.join("> <")}>`
+        let damageMessage = {
+          nickname: newMessage.nickname,
+          message: messageContent,
+        }
+        this.setState((prevState) => ({
+          messages: [...prevState.messages, damageMessage],
+        }));
+      }
+      if(newMessage.type === "roll"){
+        let messageContent = `${newMessage.attribute} + ${newMessage.skill}= ` + `<${newMessage.rolls.join("> <")}>` + `success:${newMessage.successes} ` + `compilaction ${newMessage.complication}`;
+        let rollMessage = {
+          nickname: newMessage.nickname,
+          message: messageContent,
+        }
+        this.setState((prevState) => ({
+          messages: [...prevState.messages, rollMessage],
+        }));
+      }
     });
 
     ws.addEventListener("close", () => {
