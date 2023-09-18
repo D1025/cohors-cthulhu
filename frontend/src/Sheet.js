@@ -463,25 +463,25 @@ export default class Sheet extends React.Component {
             })
             .then((data) => {
             this.setState({
-                    agi: data.attributes.agility,
-                    brawn: data.attributes.brawn,
-                    coord: data.attributes.coordination,
-                    insight: data.attributes.insight,
-                    gravitas: data.attributes.gravitas,
-                    reason: data.attributes.reason,
-                    will: data.attributes.will,
-                    academia: data.skills.academia,
-                    athletics: data.skills.athletics,
-                    crafting: data.skills.crafting,
-                    engineering: data.skills.engineering,
-                    fighting: data.skills.fighting,
-                    medicine: data.skills.medicine,
-                    observation: data.skills.observation,
-                    persuasion: data.skills.persuasion,
-                    resilience: data.skills.resilience,
-                    stealth: data.skills.stealth,
-                    survival: data.skills.survival,
-                    tactics: data.skills.tactics,
+                    agi: data.attributes.agility | 0,
+                    brawn: data.attributes.brawn | 0,
+                    coord: data.attributes.coordination | 0,
+                    insight: data.attributes.insight | 0,
+                    gravitas: data.attributes.gravitas | 0,
+                    reason: data.attributes.reason | 0,
+                    will: data.attributes.will | 0,
+                    academia: data.skills.academia | 0,
+                    athletics: data.skills.athletics | 0,
+                    crafting: data.skills.crafting | 0,
+                    engineering: data.skills.engineering | 0,
+                    fighting: data.skills.fighting | 0,
+                    medicine: data.skills.medicine | 0,
+                    observation: data.skills.observation | 0,
+                    persuasion: data.skills.persuasion | 0,
+                    resilience: data.skills.resilience | 0,
+                    stealth: data.skills.stealth | 0,
+                    survival: data.skills.survival | 0,
+                    tactics: data.skills.tactics | 0,
                 data: data,
                 isLoading: false, // Update isLoading to false
                 error: null,
@@ -528,11 +528,11 @@ export default class Sheet extends React.Component {
             { !this.state.isLoading ? (<div className={"entire"}>
                 <div className="CharacterSheet">
                     <div className="hp">
-                        <label htmlFor="stress">Enter stress(0/{this.state.data.maxStress}):</label>
-                        <input onChange={this.handleStress} type={"number"} name={"stress"} min={"0"} max={this.state.data.maxStress} />
+                        <label htmlFor="stress">Enter stress(0/{this.state.data !== null ? this.state.data.maxStress : 0}):</label>
+                        <input onChange={this.handleStress} type={"number"} name={"stress"} min={"0"} max={this.state.data !== null ? this.state.data.maxStess : 0} />
                     </div>
                     <div className={"momentum-threat"}>
-                        Momentum: {this.state.data.momentum | 0} Threat: {this.state.data.threat | 0}
+                        Momentum: {this.state.data !== null ?this.state.data.momentum : <span>bad nickname</span>} Threat: {this.state.data !== null ? this.state.data.threat : <span>bad nickname</span>}
                     </div>
                     <div className="attributes">
                         <h1>
@@ -738,17 +738,17 @@ export default class Sheet extends React.Component {
                             <div className="info-box">
                                 Focuses
                                 <ul>
-                                    {this.state.data.skills.focus.map((item, index) => (
+                                    {this.state.data !== null ? this.state.data.skills.focus.map((item, index) => (
                                         <li key={index}>{item.focus_name} [{item.skill_name}]</li>
-                                    ))}
+                                    )): <span>bad nickname</span>}
                                 </ul>
                             </div>
                             <div className="info-box">
                                 Truths
                                 <ul>
-                                    {this.state.data.truths.map((item, index)=>(
+                                    {this.state.data !== null ? this.state.data.truths.map((item, index)=>(
                                         <li key={index}>{item.description}</li>
-                                    ))}
+                                    )): <span>bad nickname</span>}
                                 </ul>
                                 <input
                                     type="text"
@@ -764,9 +764,9 @@ export default class Sheet extends React.Component {
                         <div className="info-box">
                             Talents
                             <ul>
-                            {this.state.data.talents.map((item, index)=>(
+                            {this.state.data !== null ? this.state.data.talents.map((item, index)=>(
                                 <li key={index}>{item.name}</li>
-                            ))}
+                            )): <span>bad nickname</span>}
                             </ul>
                         </div>
                     </div>
