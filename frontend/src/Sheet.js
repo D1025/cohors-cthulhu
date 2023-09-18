@@ -446,7 +446,7 @@ export default class Sheet extends React.Component {
         }))
     }
     componentDidMount() {
-        fetch(`http://104.248.37.81:8086/character?name=${this.props.nickname}`)
+        fetch(`http://104.248.37.81:8087/character?name=${this.props.nickname}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

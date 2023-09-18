@@ -16,7 +16,7 @@ class Wrapper extends Component {
     };
   }
   componentDidMount() {
-    const ws = new WebSocket("ws://104.248.37.81:8080");
+    const ws = new WebSocket("ws://104.248.37.81:8081");
 
     ws.addEventListener("open", () => {
 
