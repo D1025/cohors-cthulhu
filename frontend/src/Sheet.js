@@ -506,7 +506,7 @@ export default class Sheet extends React.Component {
                             <span className="attr-name">Attributes</span>
                         </h1>
                         <div className="attributes-box">
-                            <div className="spacer"></div>
+
                             <div className="box-1">
                                 <h2>
                                     <button
@@ -584,7 +584,7 @@ export default class Sheet extends React.Component {
                                     </button>
                                 </h2>
                             </div>
-                            <div className="spacer"></div>
+
                         </div>
                     </div>
                     <div className="skills">
