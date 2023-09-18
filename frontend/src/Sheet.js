@@ -529,10 +529,10 @@ export default class Sheet extends React.Component {
                 <div className="CharacterSheet">
                     <div className="hp">
                         <label htmlFor="stress">Enter stress(0/{this.state.data !== null ? this.state.data.maxStress : 0}):</label>
-                        <input onChange={this.handleStress} type={"number"} name={"stress"} min={"0"} max={this.state.data !== null ? this.state.data.maxStess : 0} />
+                        <input onChange={this.handleStress} type={"number"} name={"stress"} min={"0"} max={this.state.data !== null ? this.state.data.maxStress | 0 : 0} />
                     </div>
                     <div className={"momentum-threat"}>
-                        Momentum: {this.state.data !== null ?this.state.data.momentum : <span>bad nickname</span>} Threat: {this.state.data !== null ? this.state.data.threat : <span>bad nickname</span>}
+                        Momentum: {this.state.data !== null ?this.state.data.momentum | 0 : <span>bad nickname</span>} Threat: {this.state.data !== null ? this.state.data.threat | 0 : <span>bad nickname</span>}
                     </div>
                     <div className="attributes">
                         <h1>
