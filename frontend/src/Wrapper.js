@@ -52,7 +52,7 @@ class Wrapper extends Component {
         }));
       }
       if(newMessage.type === "roll"){
-        let messageContent = `${newMessage.attribute} + ${newMessage.skill}= ` + `<${newMessage.rolls.join("> <")}>`;
+        let messageContent = `${newMessage.attribute} + ${newMessage.skill}= ` + `<${newMessage.rolls.join("> <")}>` + `success:${newMessage.successes} ` + `compilaction ${newMessage.complication}`;
         let rollMessage = {
           nickname: newMessage.nickname,
           message: messageContent,

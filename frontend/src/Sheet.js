@@ -442,7 +442,7 @@ export default class Sheet extends React.Component {
 
     handledice = (e)=>{
         this.setState((prevState) => ({
-            dice: e.target.value,
+            dice: parseInt(e.target.value),
         }))
     }
     componentDidMount() {
