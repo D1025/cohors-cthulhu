@@ -5,6 +5,13 @@
   border-radius: 4%;
   border: 1px solid rgba(0, 0, 0, 0.364);
 }
+#info-name {
+  background-color: rgba(255, 0, 0, 0.559);
+  border-radius: 4%;
+  border: 1px solid rgba(0, 0, 0, 0.364);
+  font-size: 5vh;
+  margin-bottom: 5px;
+}
 .CharacterSheet {
 
   /* background-color: #e0c9a6; */
@@ -14,6 +21,7 @@
   box-shadow: 10px 5px 5px #b6a283;
   border-radius: 5%;
   font-family: "Roboto Mono", monospace;
+  max-width: 100%;
 }
 .attributes-box {
   display: flex;
@@ -97,3 +105,29 @@ button {
   width: 36vh;
   padding-left: 28vh;
 }
+#info-name{
+  display: block;
+  width: fit-content;
+}
+.box-info{
+  display: flex;
+
+}
+
+ div.CharacterInfo > div > .info-box {
+  flex: 1;
+  background-blend-mode: multiply;
+  background-color: rgba(40, 44, 52, 0.13);
+   width: fit-content;
+   border-radius: 8%;
+   padding: 1%;
+   margin-bottom: 10%;
+   margin-left: 2%;
+   margin-right: 2%;
+}
+ div.CharacterInfo > div > .focus-box > ul{
+   list-style-type: none;
+ }
+ .talents{
+   max-width: 30%;
+ }

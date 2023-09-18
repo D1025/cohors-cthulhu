@@ -45,6 +45,7 @@ export default class Sheet extends React.Component {
             tacticsChecked: false,
             focusChecked: false,
             dice: 1,
+            data: null,
             isLoading: true,
             error: null,
         };
@@ -395,6 +396,10 @@ export default class Sheet extends React.Component {
             skill = "engineering";
             skillVal = this.state.engineering;
         }
+        else if(this.state.fightingChecked){
+            skill = "fighting";
+            skillVal = this.state.fighting;
+        }
         else if(this.state.medicineChecked){
             skill = "medicine";
             skillVal = this.state.medicine;
@@ -424,8 +429,8 @@ export default class Sheet extends React.Component {
             skillVal = this.state.tactics;
         }
         else{
-            alert("Skill not checked");
-            return;
+            skill = "blank";
+            skillVal = 0;
         }
         let message = {
             type: "roll",
@@ -474,6 +479,7 @@ export default class Sheet extends React.Component {
                     stealth: data.skills.stealth,
                     survival: data.skills.survival,
                     tactics: data.skills.tactics,
+                data: data,
                 isLoading: false, // Update isLoading to false
                 error: null,
             }
@@ -491,6 +497,7 @@ export default class Sheet extends React.Component {
     }
 
     render() {
+
         return <div>
             { !this.state.isLoading ? (<div className={"entire"}>
                 <div className="CharacterSheet">
@@ -692,6 +699,37 @@ export default class Sheet extends React.Component {
 
                         </div>
                     </div>
+                    <div className="CharacterInfo">
+                        <span id={"info-name"}>Info</span>
+                        <div className="box-info">
+                            <div className="info-box">
+                                Focuses
+                                <ul>
+                                    {this.state.data.skills.focus.map((item, index) => (
+                                        <li key={index}>{item.focus_name} [{item.skill_name}]</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="info-box">
+                                Languages
+                                <ul>
+                                    {this.state.data.truths.map((item, index)=>(
+                                        <li key={index}>{item.description}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="box-info">
+                        <div className="info-box">
+                            Talents
+                            <ul>
+                            {this.state.data.talents.map((item, index)=>(
+                                <li key={index}>{item.name}</li>
+                            ))}
+                            </ul>
+                        </div>
+                    </div>
+                        </div>
                 </div>
             </div>) : (
                 <div>Loading....</div>

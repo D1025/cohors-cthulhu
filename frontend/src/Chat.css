@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   width: 30%;
   border: 1px solid black;
+  max-height: 100vh;
 }
 #chat-name {
   text-align: center;
@@ -30,7 +31,7 @@
   text-align: left;
   overflow-y: scroll;
   width: 100%;
-  height: 85vh;
+  height: 87vh;
   word-break: break-word;
 }
 .chat h3 {
