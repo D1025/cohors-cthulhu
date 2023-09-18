@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.websocket = new WebSocket('ws://localhost:8080');
+    this.websocket = new WebSocket('ws://104.248.37.81:8080');
 
     this.websocket.onopen = () => {
       console.log('Połączono z serwerem WebSocket.');
