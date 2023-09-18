@@ -1,10 +1,12 @@
 import React from "react";
 import "./Sheet.css";
 
+
 export default class Sheet extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            input: '',
             agi: 0,
             agiChecked: false,
             brawn: 0,
@@ -53,6 +55,7 @@ export default class Sheet extends React.Component {
         this.buttonClickedSkill = this.buttonClickedSkill.bind(this);
         this.handleFocusChange = this.handleFocusChange.bind(this);
     }
+    apiURL = process.env.PROD ? 'http://localhost:8086' : 'http://104.248.37.81:8087';
 
     buttonClickedAttr(e) {
         let attribute = e.target.innerHTML.split(" ")[0];
@@ -451,7 +454,7 @@ export default class Sheet extends React.Component {
         }))
     }
     componentDidMount() {
-        fetch(`http://localhost:8086/character?name=${this.props.nickname}`)
+        fetch(this.apiURL+`/character?name=${this.props.nickname}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -496,11 +499,41 @@ export default class Sheet extends React.Component {
 
     }
 
+    handleInputChange = (event) => {
+        this.setState({ input: event.target.value });
+    };
+    handleEnterPress = (e) =>{
+        if(e.key === 'Enter'){
+            this.handleAddTruth()
+        }
+    }
+    handleAddTruth = () =>{
+        let message = {
+            nickname: this.props.nickname,
+            type: 'truth',
+            message: this.state.input
+        }
+        this.props.ws.send(JSON.stringify(message))
+    }
+    handleStress = (e) =>{
+        let message = {
+            type: 'stress',
+            message: e.target.value,
+        }
+        this.props.ws.send(JSON.stringify(message))
+    }
     render() {
 
         return <div>
             { !this.state.isLoading ? (<div className={"entire"}>
                 <div className="CharacterSheet">
+                    <div className="hp">
+                        <label htmlFor="stress">Enter stress(0/{this.state.data.maxStress}):</label>
+                        <input onChange={this.handleStress} type={"number"} name={"stress"} min={"0"} max={this.state.data.maxStress} />
+                    </div>
+                    <div className={"momentum-threat"}>
+                        Momentum: {this.state.data.momentum | 0} Threat: {this.state.data.threat | 0}
+                    </div>
                     <div className="attributes">
                         <h1>
                             <span className="attr-name">Attributes</span>
@@ -711,12 +744,20 @@ export default class Sheet extends React.Component {
                                 </ul>
                             </div>
                             <div className="info-box">
-                                Languages
+                                Truths
                                 <ul>
                                     {this.state.data.truths.map((item, index)=>(
                                         <li key={index}>{item.description}</li>
                                     ))}
                                 </ul>
+                                <input
+                                    type="text"
+                                    placeholder="Enter truth..."
+                                    value={this.state.input}
+                                    onChange={this.handleInputChange}
+                                    onKeyDown={this.handleEnterPress}
+                                ></input>
+                                <button onClick={this.handleAddTruth}>Add</button>
                             </div>
                         </div>
                         <div className="box-info">

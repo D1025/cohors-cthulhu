@@ -54,6 +54,12 @@
   max-width: 80%;
   text-align: left;
 }
+.info-box > input {
+  width: 80%;
+}
+.info-box > button {
+  width:20%;
+}
 .chat-spacer{
   display:block;
 }
@@ -65,5 +71,9 @@ ul.chat {
 }
 .someone-message{
  text-align: right;
+}
+.hp {
+  padding: 2vh;
+  padding-bottom: 0;
 }
 

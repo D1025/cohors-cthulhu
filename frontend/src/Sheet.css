@@ -79,6 +79,7 @@ button {
   color: #7badd9;
   font-size: 3vh;
   flex-wrap: nowrap;
+  border-radius: 2vh;
   width: 100%;
   margin: 2px;
   text-align: left;
@@ -146,4 +147,9 @@ button {
  }
  .talents{
    max-width: 30%;
+ }
+ .momentum-threat{
+   padding: 2vh;
+   padding-bottom: 0;
+   padding-top: 0;
  }

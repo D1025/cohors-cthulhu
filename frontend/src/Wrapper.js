@@ -15,11 +15,12 @@ class Wrapper extends Component {
       nick: "",
     };
   }
+  wsUrl = process.env.PROD ? 'ws://localhost:8080' : 'ws://104.248.37.81:8081' ;
   componentDidMount() {
-    const ws = new WebSocket("ws://localhost:8080");
-
+    const ws = new WebSocket(this.wsUrl);
+    console.log(process.env, this.wsUrl)
     ws.addEventListener("open", () => {
-
+      console.log("ws connected")
       const newMessage = {
         index: 0,
         message: "Connection established",
@@ -52,7 +53,11 @@ class Wrapper extends Component {
         }));
       }
       if(newMessage.type === "roll"){
-        let messageContent = `${newMessage.attribute} + ${newMessage.skill}= ` + `<${newMessage.rolls.join("> <")}>` + `success:${newMessage.successes} ` + `compilaction:${newMessage.complication}`;
+        let focusChecked = ''
+        if (newMessage.focus){
+          focusChecked = '[F] '
+        }
+        let messageContent = `${focusChecked}${newMessage.attribute} + ${newMessage.skill}= ` + `<${newMessage.rolls.join("> <")}>` + `success:${newMessage.successes} ` + `complication:${newMessage.complication}`;
         let rollMessage = {
           nickname: newMessage.nickname,
           message: messageContent,

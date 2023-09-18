@@ -4,6 +4,7 @@ import "./Chat.css";
 export default class Chat extends React.Component {
   constructor(props) {
     super(props);
+    this.chatContainerRef = React.createRef();
     this.sendMessage = this.sendMessage.bind(this);
     this.state = {
       messages: props.messages,
@@ -12,9 +13,24 @@ export default class Chat extends React.Component {
     };
   }
   componentDidUpdate(prevProps) {
-    // Check if props.nickname has changed and update the state accordingly
+
     if (this.props.nickname !== prevProps.nickname) {
       this.setState({ nickname: this.props.nickname });
+    }
+
+    // Check if new messages have been added and scroll to the bottom
+    if (this.props.messages.length !== prevProps.messages.length) {
+      this.scrollToBottom();
+    }
+  }
+  componentDidMount() {
+    // Call scrollToBottom when the component first mounts to ensure initial scrolling
+    this.scrollToBottom();
+  }
+  scrollToBottom() {
+    if (this.chatContainerRef.current) {
+      const chatContainer = this.chatContainerRef.current;
+      chatContainer.scrollTop = chatContainer.scrollHeight;
     }
   }
   sendMessage() {
@@ -37,6 +53,7 @@ export default class Chat extends React.Component {
       this.sendMessage()
     }
   }
+
   render() {
     const { messages } = this.props;
     messages.map((messsage, index) => {
@@ -45,7 +62,7 @@ export default class Chat extends React.Component {
       <div className="chat-box">
         <h1 id="chat-name">CHAT</h1>
         <div className="break"></div>
-        <ul className="chat">
+        <ul className="chat" ref={this.chatContainerRef}>
           {messages.map((message, i) =>
             i == 0 ? (
               <h3>{message.message}</h3>

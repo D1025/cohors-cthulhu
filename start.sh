@@ -9,13 +9,13 @@ fi
 
 python backend/python/main.py &
 
-npm --prefix ./frontend run start &
-
 cd frontend &
 
 npm i &
 
 cd .. &
+
+npm --prefix ./frontend run start &
 
 echo $! > server_pid.txt
 
