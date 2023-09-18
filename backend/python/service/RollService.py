@@ -2,10 +2,13 @@ import random
 import re
 
 def rollFromJson(message):
-    num_dice = message['dice']
+    num_dice = int(message['dice'])
     attribute_value = message['attributeValue']
     skill_value = message['skillValue']
-    focus = int(message['focus'])
+    if message['focus']:
+        focus = 1
+    else:
+        focus = 0
     attribute_string = message['attribute']
     skill_string = message['skill']
     
