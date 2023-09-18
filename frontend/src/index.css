@@ -6,7 +6,8 @@ body {
   font-size: 14px!important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000") !important;
+  background-size: cover;
+  background-image: url("https://free4kwallpapers.com/uploads/originals/2022/05/17/cthulhu-wallpaper.jpg") !important;
 }
 
 code {

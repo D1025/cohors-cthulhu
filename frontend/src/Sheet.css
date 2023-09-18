@@ -1,25 +1,40 @@
-
+body {
+  color: #b6aeae !important;
+  font-family: 'MedievalSharp', cursive !important;
+}
+h1{
+  font-size: 4vh !important;
+  font-family: 'MedievalSharp', cursive;
+}
 
 .attr-name {
-  background-color: rgba(255, 0, 0, 0.559);
+  background-color: rgba(31, 32, 114, 0.56);
   border-radius: 4%;
   border: 1px solid rgba(0, 0, 0, 0.364);
+}
+#info-name {
+  background-color: rgba(50, 100, 131, 0.64);
+  border-radius: 4%;
+  border: 1px solid rgba(50, 100, 131, 0.64);
+  font-size: 5vh;
+  margin-bottom: 5px;
 }
 .CharacterSheet {
 
   /* background-color: #e0c9a6; */
-  background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
-  background-color: rgba(128, 128, 128, 0.016);
+  background-color: rgba(50, 88, 131, 0.61);
   background-blend-mode: multiply;
-  box-shadow: 10px 5px 5px #b6a283;
+  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.23);
   border-radius: 5%;
   font-family: "Roboto Mono", monospace;
+  max-width: 100%;
 }
 .attributes-box {
   display: flex;
 
   flex-direction: row;
   justify-content: space-between;
+  padding: 3%;
 
 }
 .skills-box {
@@ -30,26 +45,27 @@
 }
 .box-1,
 .box-2 {
+
   flex-direction: column;
 }
 
 .attributes-box > .box-1 > h2,
 .attributes-box > .box-2 > h2 {
-  background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
+
   background-color: #cdba9e03;
   background-blend-mode: multiply;
   border-radius: 5%;
-  box-shadow: 8px 5px 5px #665c47;
+  box-shadow: 8px 5px 5px rgba(0, 0, 0, 0.23);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 button {
-  background-image: url("https://img.freepik.com/free-photo/grunge-vintage-old-paper-background_1373-431.jpg?w=2000");
-  background-color: #cdba9e03;
+  border: none;
+  background-color: rgba(50, 100, 131, 0.64);
   background-blend-mode: multiply;
   border-radius: 5%;
-  box-shadow: 8px 5px 5px #665c47;
+  box-shadow: 8px 5px 5px rgba(0, 0, 0, 0.23);
 }
 .attributes {
   width: 100%;
@@ -59,6 +75,8 @@ button {
   width: 5vh;
 }
 .button {
+  font-family: 'MedievalSharp', cursive;
+  color: #7badd9;
   font-size: 3vh;
   flex-wrap: nowrap;
   width: 100%;
@@ -66,15 +84,17 @@ button {
   text-align: left;
 }
 .button > span {
+  padding-left: 1vh;
+  padding-right: 1vh;
   border: 2px solid black;
-  box-shadow: rgba(0, 0, 0, 0.377) 3px 5px 5px;
+  box-shadow: rgba(0, 0, 0, 0.23) 3px 5px 5px;
   border-radius: 20%;
   float: right;
   margin: 2px;
 }
 .checked {
   border: #770ccb solid 3px;
-  background-color: rgba(40, 44, 52, 0.1);
+  background-color: rgba(44, 66, 114, 0.1);
   background-blend-mode: multiply;
 }
 .focus-box{
@@ -94,6 +114,36 @@ button {
   display: flex !important;
   flex-direction: column;
   text-align: center;
-  width: 36vh;
-  padding-left: 28vh;
+  width: 38vh;
+  padding-left: 30vh;
 }
+#info-name{
+  font-family: 'MedievalSharp', cursive;
+  background-color: rgba(31, 32, 114, 0.56);
+  border-radius: 20%;
+  border: 1px solid rgba(0, 0, 0, 0.364);
+  display: block;
+  width: fit-content;
+}
+.box-info{
+  display: flex;
+
+}
+
+ div.CharacterInfo > div > .info-box {
+  flex: 1;
+  background-blend-mode: multiply;
+  background-color: rgba(42, 60, 98, 0.77);
+   width: fit-content;
+   border-radius: 8%;
+   padding: 1%;
+   margin-bottom: 10%;
+   margin-left: 2%;
+   margin-right: 2%;
+}
+ div.CharacterInfo > div > .focus-box > ul{
+   list-style-type: none;
+ }
+ .talents{
+   max-width: 30%;
+ }

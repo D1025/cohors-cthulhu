@@ -1,8 +1,12 @@
+
 .chat-box {
+  background-color: rgba(50, 100, 131, 0.64);
+  background-blend-mode: multiply;
   display: flex;
   flex-wrap: wrap;
   width: 30%;
   border: 1px solid black;
+  max-height: 100vh;
 }
 #chat-name {
   text-align: center;
@@ -30,7 +34,7 @@
   text-align: left;
   overflow-y: scroll;
   width: 100%;
-  height: 85vh;
+  height: 87vh;
   word-break: break-word;
 }
 .chat h3 {
@@ -38,8 +42,10 @@
   text-align: center;
 }
 .chat li {
+  color: #b4b0b0 !important;
+  font-family: "Times New Roman" !important;
   color: black;
-  background-color: rgba(127, 102, 57, 0.15);
+  background-color: rgba(31, 32, 114, 0.56);
   background-blend-mode: multiply;
   margin-top: 1vh;
   border-radius: 5%;
