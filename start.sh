@@ -6,14 +6,14 @@ if [ $? -ne 0 ]; then
   echo "Błąd w setup.py"
   exit 1
 fi
+cd frontend 
+
+npm i 
+
+cd .. 
 
 python backend/python/main.py &
 
-cd frontend &
-
-npm i &
-
-cd .. &
 
 npm --prefix ./frontend run start &
 
