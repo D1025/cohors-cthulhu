@@ -1,4 +1,6 @@
 import { Component, useEffect, useState } from "react";
+
+import Creation from '../CreationSheet/Creation';
 import Chat from "./Chat";
 import Sheet from "./Sheet";
 import "./Wrapper.css";
@@ -18,7 +20,7 @@ class Wrapper extends Component {
   wsUrl = process.env.PROD ? 'ws://localhost:8080' : 'ws://104.248.37.81:8081' ;
   componentDidMount() {
     const ws = new WebSocket(this.wsUrl);
-    console.log(process.env, this.wsUrl)
+
     ws.addEventListener("open", () => {
       console.log("ws connected")
       const newMessage = {
@@ -133,6 +135,7 @@ class Wrapper extends Component {
         ) : (
           <p>Connecting to WebSocket...</p>
         )}
+
       </div>
     );
   }
