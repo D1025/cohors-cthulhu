@@ -1,4 +1,5 @@
-import { Component, useEffect, useState } from "react";
+import { Component} from "react";
+import { useHistory } from 'react-router-dom';
 
 import Creation from '../CreationSheet/Creation';
 import Chat from "./Chat";
@@ -19,6 +20,11 @@ class Wrapper extends Component {
   }
   wsUrl = process.env.PROD ? 'ws://localhost:8080' : 'ws://104.248.37.81:8081' ;
   componentDidMount() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const nickname = searchParams.get("nickname");
+    if (nickname) {
+      this.setState({ nick: nickname, isNicknameSet: true });
+    }
     const ws = new WebSocket(this.wsUrl);
 
     ws.addEventListener("open", () => {
@@ -102,6 +108,7 @@ class Wrapper extends Component {
   setNickname = () => {
     this.setState({ nick: this.state.inputNick });
     this.setState({ isNicknameSet: true });
+    window.location.href = '?nickname=' + this.state.inputNick;
   };
 
   handleNickInput = (event) => {

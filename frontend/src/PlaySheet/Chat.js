@@ -27,6 +27,13 @@ export default class Chat extends React.Component {
     // Call scrollToBottom when the component first mounts to ensure initial scrolling
     this.scrollToBottom();
   }
+  handleReloadComponent = () => {
+    // Construct the URL with the nickname parameter
+    const url = `/your-component?nickname=${encodeURIComponent(this.props.nickname)}`;
+
+    // Reload the page with the updated URL
+    window.location.href = url;
+}
   scrollToBottom() {
     if (this.chatContainerRef.current) {
       const chatContainer = this.chatContainerRef.current;

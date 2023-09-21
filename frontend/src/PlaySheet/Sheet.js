@@ -207,6 +207,12 @@ buttonClickedSkill(e) {
         }))
     }
     componentDidMount() {
+        const searchParams = new URLSearchParams(window.location.search);
+        const nickname = searchParams.get("nickname");
+        if (nickname) {
+            this.setState({ nickname: nickname });
+          }
+        
         fetch(this.apiURL+`/character?name=${this.props.nickname}`)
             .then((response) => {
                 if (!response.ok) {
@@ -286,13 +292,33 @@ buttonClickedSkill(e) {
         });
     }
     handleDeleteTruth(itemID){
-        // TODO: send delete to api
-        // make console log itemID
-
-
-    }
+        const message = {
+            nickname: this.props.nickname,
+            type: 'delete',
+            itemType: 'truth',
+            itemID: itemID
+        }
+        this.props.ws.send(JSON.stringify(message))
+        // Refresh the React page
+       const url = '/?nickname=' + this.props.nickname;
+       window.location.href = url;
+    }  
     handleDeleteFocus(itemID){
-        // TODO: send delete to api
+        const message = {
+            nickname: this.props.nickname,
+            type: 'delete',
+            itemType: 'focus',
+            itemID: itemID
+        }
+        this.props.ws.send(JSON.stringify(message))
+
+        // Refresh the React page
+        window.location.reload();
+        const url = '/?nickname=' + this.props.nickname;
+        window.location.href = url;
+    }
+    render() {
+
     }
     render() {
 
@@ -346,7 +372,6 @@ buttonClickedSkill(e) {
                             </div>
                             <div className="spacer"></div>
                             <div className="box-2">
-
                                 <h2>
                                     <button
                                         onClick={this.buttonClickedAttr}
