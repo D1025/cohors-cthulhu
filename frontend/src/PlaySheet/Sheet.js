@@ -287,6 +287,9 @@ buttonClickedSkill(e) {
     }
     handleDeleteTruth(itemID){
         // TODO: send delete to api
+        // make console log itemID
+
+
     }
     handleDeleteFocus(itemID){
         // TODO: send delete to api
@@ -343,6 +346,7 @@ buttonClickedSkill(e) {
                             </div>
                             <div className="spacer"></div>
                             <div className="box-2">
+
                                 <h2>
                                     <button
                                         onClick={this.buttonClickedAttr}
