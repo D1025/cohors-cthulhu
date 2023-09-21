@@ -50,391 +50,144 @@ export default class Sheet extends React.Component {
             data: null,
             isLoading: true,
             error: null,
+            editFocuses: false,
+            editTruths: false,
+            editTalents: false,
         };
         this.buttonClickedAttr = this.buttonClickedAttr.bind(this);
         this.buttonClickedSkill = this.buttonClickedSkill.bind(this);
         this.handleFocusChange = this.handleFocusChange.bind(this);
+        this.handleEditFocuses = this.handleEditFocuses.bind(this);
+        this.handleEditTruths = this.handleEditTruths.bind(this);
     }
     apiURL = process.env.PROD ? 'http://localhost:8086' : 'http://104.248.37.81:8087';
 
-    buttonClickedAttr(e) {
-        let attribute = e.target.innerHTML.split(" ")[0];
+    
 
-        switch (attribute){
-            case 'Agility':
-                this.setState((prevState) =>({
-                    agiChecked: !prevState.agiChecked,
-                    brawnChecked: false,
-                    coordChecked: false,
-                    insightChecked: false,
-                    gravitasChecked: false,
-                    reasonChecked: false,
-                    willChecked: false,
-                }));
-                break;
-            case 'Brawn':
-                this.setState((prevState) =>({
-                    agiChecked: false,
-                    brawnChecked: !prevState.brawnChecked,
-                    coordChecked: false,
-                    insightChecked: false,
-                    gravitasChecked: false,
-                    reasonChecked: false,
-                    willChecked: false,
-                }));
-                break;
-            case 'Coordination':
-                this.setState((prevState) =>({
-                agiChecked: false,
-                brawnChecked: false,
-                coordChecked: !prevState.coordChecked,
-                insightChecked: false,
-                gravitasChecked: false,
-                reasonChecked: false,
-                willChecked: false,
-            }));
-                break;
-            case 'Insight':
-                this.setState((prevState) =>({
-                    agiChecked: false,
-                    brawnChecked: false,
-                    coordChecked: false,
-                    insightChecked: !prevState.insightChecked,
-                    gravitasChecked: false,
-                    reasonChecked: false,
-                    willChecked: false,
-                }));
-                break;
-            case 'Gravitas':
-                this.setState((prevState) =>({
-                    agiChecked: false,
-                    brawnChecked: false,
-                    coordChecked: false,
-                    insightChecked: false,
-                    gravitasChecked: !prevState.gravitasChecked,
-                    reasonChecked: false,
-                    willChecked: false,
-                }));
-                break;
-            case 'Reason':
-                this.setState((prevState) =>({
-                    agiChecked: false,
-                    brawnChecked: false,
-                    coordChecked: false,
-                    insightChecked: false,
-                    gravitasChecked: false,
-                    reasonChecked: !prevState.reasonChecked,
-                    willChecked: false,
-                }));
-                break;
-            case 'Will':
-                this.setState((prevState) =>({
-                    agiChecked: false,
-                    brawnChecked: false,
-                    coordChecked: false,
-                    insightChecked: false,
-                    gravitasChecked: false,
-                    reasonChecked: false,
-                    willChecked: !prevState.willChecked,
-                }));
-                break;
-        }
+buttonClickedAttr(e) {
+    const attributeMapping = {
+    'Agility': 'agiChecked',
+    'Brawn': 'brawnChecked',
+    'Coordination': 'coordChecked',
+    'Insight': 'insightChecked',
+    'Gravitas': 'gravitasChecked',
+    'Reason': 'reasonChecked',
+    'Will': 'willChecked'
+};
+    let attribute = e.target.innerHTML.split(" ")[0];
+    let stateKey = attributeMapping[attribute];
 
-
-
+    if (stateKey) {
+        this.setState(prevState => ({
+            agiChecked: false,
+            brawnChecked: false,
+            coordChecked: false,
+            insightChecked: false,
+            gravitasChecked: false,
+            reasonChecked: false,
+            willChecked: false,
+            [stateKey]: !prevState[stateKey]
+        }));
     }
-    buttonClickedSkill(e){
-        let skillName = e.target.innerHTML.split(" ")[0];
-        switch(skillName){
-            case 'academia':
-                this.setState((prevState)=>({
-                    academiaChecked: !prevState.academiaChecked,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case 'athletics':
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: !prevState.athleticsChecked,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case 'crafting':
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: !prevState.craftingChecked,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "engineering":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: !prevState.engineeringChecked,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "fighting":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: !prevState.fightingChecked,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "medicine":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: !prevState.medicineChecked,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "observation":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: !prevState.observationChecked,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "persuasion":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: !prevState.persuasionChecked,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "resilience":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: !prevState.resilienceChecked,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "stealth":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: !prevState.resilienceChecked,
-                    survivalChecked: false,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "survival":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: !prevState.survivalChecked,
-                    tacticsChecked: false,
-                }))
-                break;
-            case "tactics":
-                this.setState((prevState)=>({
-                    academiaChecked: false,
-                    athleticsChecked: false,
-                    craftingChecked: false,
-                    engineeringChecked: false,
-                    fightingChecked: false,
-                    medicineChecked: false,
-                    observationChecked: false,
-                    persuasionChecked: false,
-                    resilienceChecked: false,
-                    stealthChecked: false,
-                    survivalChecked: false,
-                    tacticsChecked: !prevState.tacticsChecked,
-                }))
-                break;
-        }
+}
+buttonClickedSkill(e) {
+    const skillMapping = {
+        'academia': 'academiaChecked',
+        'athletics': 'athleticsChecked',
+        'crafting': 'craftingChecked',
+        'engineering': 'engineeringChecked',
+        'fighting': 'fightingChecked',
+        'medicine': 'medicineChecked',
+        'observation': 'observationChecked',
+        'persuasion': 'persuasionChecked',
+        'resilience': 'resilienceChecked',
+        'stealth': 'stealthChecked',
+        'survival': 'survivalChecked',
+        'tactics': 'tacticsChecked'
+    };
 
+    let skillName = e.target.innerHTML.split(" ")[0];
+    let stateKey = skillMapping[skillName];
+
+    if (stateKey) {
+        this.setState(prevState => ({
+            academiaChecked: false,
+            athleticsChecked: false,
+            craftingChecked: false,
+            engineeringChecked: false,
+            fightingChecked: false,
+            medicineChecked: false,
+            observationChecked: false,
+            persuasionChecked: false,
+            resilienceChecked: false,
+            stealthChecked: false,
+            survivalChecked: false,
+            tacticsChecked: false,
+            [stateKey]: !prevState[stateKey]
+        }));
     }
+}
     handleFocusChange = () => {
         this.setState((prevState)=>({
             focusChecked: !prevState.focusChecked,
         }))
     }
-    handleSubmitRoll = ()=>{
-        let skill = "";
-        let skillVal = 0;
-        let attribute = "";
+    handleSubmitRoll = () => {
+        const attributeMapping = {
+            'agility': { checked: this.state.agiChecked, value: this.state.agi },
+            'brawn': { checked: this.state.brawnChecked, value: this.state.brawn },
+            'coordination': { checked: this.state.coordChecked, value: this.state.coord },
+            'insight': { checked: this.state.insightChecked, value: this.state.insight },
+            'gravitas': { checked: this.state.gravitasChecked, value: this.state.gravitas },
+            'reason': { checked: this.state.reasonChecked, value: this.state.reason },
+            'will': { checked: this.state.willChecked, value: this.state.will }
+        };
+    
+        const skillMapping = {
+            'academia': { checked: this.state.academiaChecked, value: this.state.academia },
+            'athletics': { checked: this.state.athleticsChecked, value: this.state.athletics },
+            'crafting': { checked: this.state.craftingChecked, value: this.state.crafting },
+            'engineering': { checked: this.state.engineeringChecked, value: this.state.engineering },
+            'fighting': { checked: this.state.fightingChecked, value: this.state.fighting },
+            'medicine': { checked: this.state.medicineChecked, value: this.state.medicine },
+            'observation': { checked: this.state.observationChecked, value: this.state.observation },
+            'persuasion': { checked: this.state.persuasionChecked, value: this.state.persuasion },
+            'resilience': { checked: this.state.resilienceChecked, value: this.state.resilience },
+            'stealth': { checked: this.state.stealthChecked, value: this.state.stealth },
+            'survival': { checked: this.state.survivalChecked, value: this.state.survival },
+            'tactics': { checked: this.state.tacticsChecked, value: this.state.tactics }
+        };
+    
+        let attribute = '';
         let attrVal = 0;
-        if (this.state.agiChecked){
-            attribute = "agility";
-            attrVal = this.state.agi;
+        for (let key in attributeMapping) {
+            if (attributeMapping[key].checked) {
+                attribute = key;
+                attrVal = attributeMapping[key].value;
+                break;
+            }
         }
-        else if(this.state.brawnChecked){
-            attribute = "brawn";
-            attrVal = this.state.brawn;
-        }
-        else if(this.state.coordChecked){
-            attribute = "coordination";
-            attrVal = this.state.coord;
-        }
-        else if(this.state.insightChecked){
-            attribute = "insight";
-            attrVal = this.state.insight;
-        }
-        else if(this.state.gravitasChecked){
-            attribute = "gravitas";
-            attrVal = this.state.gravitas;
-        }
-        else if(this.state.reasonChecked){
-            attribute = "reason";
-            attrVal = this.state.reason;
-        }
-        else if(this.state.willChecked){
-            attribute = "will";
-            attrVal = this.state.will;
-        }
-        else{
-            alert("No skill checked");
+    
+        if (!attribute) {
+            alert("No attribute checked");
             return;
         }
-        if(this.state.academiaChecked){
-            skill = "academia";
-            skillVal = this.state.academia;
+    
+        let skill = '';
+        let skillVal = 0;
+        for (let key in skillMapping) {
+            if (skillMapping[key].checked) {
+                skill = key;
+                skillVal = skillMapping[key].value;
+                break;
+            }
         }
-        else if(this.state.athleticsChecked){
-            skill = "athletics";
-            skillVal = this.state.athletics;
-        }
-        else if(this.state.craftingChecked){
-            skill = "crafting";
-            skillVal = this.state.crafting;
-        }
-        else if(this.state.engineeringChecked){
-            skill = "engineering";
-            skillVal = this.state.engineering;
-        }
-        else if(this.state.fightingChecked){
-            skill = "fighting";
-            skillVal = this.state.fighting;
-        }
-        else if(this.state.medicineChecked){
-            skill = "medicine";
-            skillVal = this.state.medicine;
-        }
-        else if(this.state.observationChecked){
-            skill = "observation";
-            skillVal = this.state.observation;
-        }
-        else if(this.state.persuasionChecked){
-            skill = "persuasion";
-            skillVal = this.state.persuasion;
-        }
-        else if(this.state.resilienceChecked){
-            skill = "resilience";
-            skillVal = this.state.resilience;
-        }
-        else if(this.state.stealthChecked){
-            skill = "stealth";
-            skillVal = this.state.stealth;
-        }
-        else if(this.state.survivalChecked){
-            skill = "survival";
-            skillVal = this.state.survival;
-        }
-        else if(this.state.tacticsChecked){
-            skill = "tactics";
-            skillVal = this.state.tactics;
-        }
-        else{
+    
+        if (!skill) {
             skill = "blank";
             skillVal = 0;
         }
+    
         let message = {
             type: "roll",
             nickname: this.props.nickname,
@@ -508,7 +261,7 @@ export default class Sheet extends React.Component {
         }
     }
     handleAddTruth = () =>{
-        let message = {
+        const message = {
             nickname: this.props.nickname,
             type: 'truth',
             message: this.state.input
@@ -521,6 +274,22 @@ export default class Sheet extends React.Component {
             message: e.target.value,
         }
         this.props.ws.send(JSON.stringify(message))
+    }
+    handleEditFocuses() {
+        this.setState({
+            editFocuses: !this.state.editFocuses,
+        });
+    }
+    handleEditTruths() {
+        this.setState({
+            editTruths: !this.state.editTruths,
+        });
+    }
+    handleDeleteTruth(itemID){
+        // TODO: send delete to api
+    }
+    handleDeleteFocus(itemID){
+        // TODO: send delete to api
     }
     render() {
 
@@ -736,18 +505,19 @@ export default class Sheet extends React.Component {
                         <span id={"info-name"}>Info</span>
                         <div className="box-info">
                             <div className="info-box">
-                                Focuses
+                                Focuses <button className={"btn btn-danger edit-button"} onClick={this.handleEditFocuses}>edit</button>
                                 <ul>
-                                    {this.state.data !== null ? this.state.data.skills.focus.map((item, index) => (
-                                        <li key={index}>{item.focus_name} [{item.skill_name}]</li>
+                                    {this.state.data !== null ? this.state.data.skills.focus.map((item) => (
+                                        <li key={item.id}>{item.focus_name} [{item.skill_name}] {this.state.editFocuses ? <button className={"x-button"} onClick={()=>this.handleDeleteFocus(item.id)}>X</button> : ""}</li>
                                     )): <span>bad nickname</span>}
                                 </ul>
+                                {this.state.editFocuses ?<div> <input type={"text"} placeholder={"enter focus..."} /><button>Add</button> </div>: ""}
                             </div>
                             <div className="info-box">
-                                Truths
+                                Truths <button className={"btn btn-danger edit-button"} onClick={this.handleEditTruths}>edit</button>
                                 <ul>
-                                    {this.state.data !== null ? this.state.data.truths.map((item, index)=>(
-                                        <li key={index}>{item.description}</li>
+                                    {this.state.data !== null ? this.state.data.truths.map((item)=>(
+                                        <li key={item.id}>{item.description} {this.state.editTruths ? <button className={"x-button"} onClick={()=>this.handleDeleteTruth(item.id)}>X</button> : ""}</li>
                                     )): <span>bad nickname</span>}
                                 </ul>
                                 <input
@@ -764,8 +534,8 @@ export default class Sheet extends React.Component {
                         <div className="info-box">
                             Talents
                             <ul>
-                            {this.state.data !== null ? this.state.data.talents.map((item, index)=>(
-                                <li key={index}>{item.name}</li>
+                            {this.state.data !== null ? this.state.data.talents.map((item, _)=>(
+                                <li key={item.id}>{item.name}</li>
                             )): <span>bad nickname</span>}
                             </ul>
                         </div>
