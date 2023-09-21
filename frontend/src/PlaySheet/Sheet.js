@@ -207,12 +207,6 @@ buttonClickedSkill(e) {
         }))
     }
     componentDidMount() {
-        const searchParams = new URLSearchParams(window.location.search);
-        const nickname = searchParams.get("nickname");
-        if (nickname) {
-            this.setState({ nickname: nickname });
-          }
-        
         fetch(this.apiURL+`/character?name=${this.props.nickname}`)
             .then((response) => {
                 if (!response.ok) {

@@ -1,7 +1,6 @@
 import { Component} from "react";
-import { useHistory } from 'react-router-dom';
 
-import Creation from '../CreationSheet/Creation';
+
 import Chat from "./Chat";
 import Sheet from "./Sheet";
 import "./Wrapper.css";

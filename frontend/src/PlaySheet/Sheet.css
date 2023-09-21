@@ -98,9 +98,7 @@ button {
   background-color: rgba(44, 66, 114, 0.1);
   background-blend-mode: multiply;
 }
-.focus-box{
 
-}
 .focus{
   display: flex !important;
   flex-direction: column;
