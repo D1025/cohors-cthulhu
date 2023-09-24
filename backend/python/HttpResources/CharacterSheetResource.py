@@ -38,8 +38,9 @@ class CharacterSheetResource(resource.Resource):
                 response = json.dumps(character.to_dict())
                 request.setResponseCode(200)
             else:
-                response = json.dumps({"error": "Character not found"})
-                request.setResponseCode(404) 
+                character = CharacterSheet(nameParam)
+                response = json.dumps(character.to_dict())
+                request.setResponseCode(200)
         else:
             response = json.dumps({"error": "Name parameter is missing"})
             request.setResponseCode(400) 

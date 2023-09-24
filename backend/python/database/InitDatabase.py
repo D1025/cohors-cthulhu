@@ -10,6 +10,7 @@ from models.Talents import Base as TalentsBase
 from models.CharacterSheet import Base as CharacterSheetBase
 from models.Equipment import Base as EquipmentBase
 from models.Weapons import Base as WeaponsBase
+from models.Chat import Base as ChatBase
 
 from models.CharacterSheet import CharacterSheet
 
@@ -40,6 +41,8 @@ def create_database():
             EquipmentBase.metadata.create_all(engine)
         if not inspector.has_table("weapons"):
             WeaponsBase.metadata.create_all(engine)
+        if not inspector.has_table("chat"):
+            ChatBase.metadata.create_all(engine)
         print("Baza danych została zainicjowana.")
         
         #EDIGO
@@ -47,45 +50,45 @@ def create_database():
         if not session.execute(exists_query).scalar():
             add_egino_character_sheet(session)
         
-        character_sheet = session.query(CharacterSheet).filter_by(name = "Egino, Who Sees the Hidden").first()
-        with open("edigo.json", "w") as json_file:
-            json.dump(character_sheet.to_dict(), json_file)
+        # character_sheet = session.query(CharacterSheet).filter_by(name = "Egino, Who Sees the Hidden").first()
+        # with open("edigo.json", "w") as json_file:
+        #     json.dump(character_sheet.to_dict(), json_file)
             
         #AKUSSA
         exists_query = session.query(exists().where(CharacterSheet.name == "Akusaa"))
         if not session.execute(exists_query).scalar():
             add_akussa_character_sheet(session)
             
-        character_sheet = session.query(CharacterSheet).filter_by(name = "Akusaa").first()
-        with open("akussa.json", "w") as json_file:
-            json.dump(character_sheet.to_dict(), json_file)
+        # character_sheet = session.query(CharacterSheet).filter_by(name = "Akusaa").first()
+        # with open("akussa.json", "w") as json_file:
+        #     json.dump(character_sheet.to_dict(), json_file)
             
         #COSSUS
         exists_query = session.query(exists().where(CharacterSheet.name == "Cossus Atrius Thamugadus"))
         if not session.execute(exists_query).scalar():
             add_cossus_character_sheet(session)
             
-        character_sheet = session.query(CharacterSheet).filter_by(name = "Cossus Atrius Thamugadus").first()
-        with open("cossus.json", "w") as json_file:
-            json.dump(character_sheet.to_dict(), json_file)
+        # character_sheet = session.query(CharacterSheet).filter_by(name = "Cossus Atrius Thamugadus").first()
+        # with open("cossus.json", "w") as json_file:
+        #     json.dump(character_sheet.to_dict(), json_file)
             
         #HERODION
         exists_query = session.query(exists().where(CharacterSheet.name == "Herodion"))
         if not session.execute(exists_query).scalar():
             add_herodion_character_sheet(session)
             
-        character_sheet = session.query(CharacterSheet).filter_by(name = "Herodion").first()
-        with open("herodion.json", "w") as json_file:
-            json.dump(character_sheet.to_dict(), json_file)
+        # character_sheet = session.query(CharacterSheet).filter_by(name = "Herodion").first()
+        # with open("herodion.json", "w") as json_file:
+        #     json.dump(character_sheet.to_dict(), json_file)
             
         #VERODU
         exists_query = session.query(exists().where(CharacterSheet.name == "Verodu"))
         if not session.execute(exists_query).scalar():
             add_verodu_character_sheet(session)
             
-        character_sheet = session.query(CharacterSheet).filter_by(name = "Verodu").first()
-        with open("verodu.json", "w") as json_file:
-            json.dump(character_sheet.to_dict(), json_file)
+        # character_sheet = session.query(CharacterSheet).filter_by(name = "Verodu").first()
+        # with open("verodu.json", "w") as json_file:
+        #     json.dump(character_sheet.to_dict(), json_file)
 
 
         
