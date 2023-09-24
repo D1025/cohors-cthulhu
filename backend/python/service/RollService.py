@@ -40,9 +40,9 @@ def rolld20(amount, attributeValue, skillValue, focus, attribute, skill):
         score = random.randint(1,20)
         if score == 20:
             complication+=1
-        if score <= focuslevel:
-            successes+=2
         if score <= level:
+            successes+=1
+        if score <= focuslevel:
             successes+=1
         dice.append(score)
         

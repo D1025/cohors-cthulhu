@@ -1,30 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import Wrapper from './PlaySheet/Wrapper';
+import Creation from './CreationSheet/Creation';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.websocket = new WebSocket('ws://104.248.37.81:8081');
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <Router>
+                <Routes>
+                    <Route path="/"  element={<Wrapper />} />
+                    <Route path="/create" element={<Creation />} />
 
-    this.websocket.onopen = () => {
-      console.log('Połączono z serwerem WebSocket.');
-    };
+                    {/* Catch-all route for invalid routes */}
+                    <Route path="*" element={<Navigate to="/" />} />
 
-    this.websocket.onmessage = (event) => {
-      console.log('Odebrano dane: ' + event.data);
-    };
-  }
-
-  sendMessage = () => {
-    this.websocket.send('To jest wiadomość od klienta.');
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.sendMessage}>Wyślij wiadomość</button>
-      </div>
-    );
-  }
+                </Routes>
+                </Router>
+            </div>
+        );
+    }
 }
 
 export default App;

@@ -1,8 +1,9 @@
 from twisted.internet import reactor, endpoints
 from twisted.internet.endpoints import TCP4ServerEndpoint
 from HttpResources.CharacterSheetResource import CharacterSheetResource
+from HttpResources.ChatResource import ChatHistoryResource
 from twisted.web import resource
-from HttpResources.CharacterSheetResource import CharacterSheetResource
+
 
 from twisted.web import server
 
@@ -26,8 +27,10 @@ if __name__ == '__main__':
     print(f"Serwer WebSocket jest gotowy do przyjmowania połączeń na porcie {config('FACTORY_PORT')}")
     
     characterSheetResource = CharacterSheetResource()
+    chatResource = ChatHistoryResource()
     root = resource.Resource()
     root.putChild("character".encode('utf-8'), characterSheetResource)
+    root.putChild("chat".encode('utf-8'), chatResource)
     endpoints.serverFromString(reactor, config('HTTP_PORT')).listen(server.Site(root))
     
     print(f"Serwer HTTP jest gotowy do przyjmowania połączeń na porcie {config('HTTP_PORT')}")
