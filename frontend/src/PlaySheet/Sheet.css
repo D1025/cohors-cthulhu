@@ -79,6 +79,7 @@ button {
   color: #7badd9;
   font-size: 3vh;
   flex-wrap: nowrap;
+  border-radius: 2vh;
   width: 100%;
   margin: 2px;
   text-align: left;
@@ -97,9 +98,7 @@ button {
   background-color: rgba(44, 66, 114, 0.1);
   background-blend-mode: multiply;
 }
-.focus-box{
 
-}
 .focus{
   display: flex !important;
   flex-direction: column;
@@ -147,3 +146,19 @@ button {
  .talents{
    max-width: 30%;
  }
+ .momentum-threat{
+   padding: 2vh;
+   padding-bottom: 0;
+   padding-top: 0;
+ }
+.edit-button{
+  font-size: 1.5vh !important;
+  width: fit-content !important;
+  float:right;
+  text-align: center;
+}
+.x-button{
+  font-size: 1.5vh;
+  background-color: transparent;
+  box-shadow: none;
+}

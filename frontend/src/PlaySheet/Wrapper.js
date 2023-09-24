@@ -1,4 +1,6 @@
-import { Component, useEffect, useState } from "react";
+import { Component} from "react";
+
+
 import Chat from "./Chat";
 import Sheet from "./Sheet";
 import "./Wrapper.css";
@@ -15,11 +17,17 @@ class Wrapper extends Component {
       nick: "",
     };
   }
+  wsUrl = process.env.PROD ? 'ws://localhost:8080' : 'ws://104.248.37.81:8081' ;
   componentDidMount() {
-    const ws = new WebSocket("ws://localhost:8080");
+    const searchParams = new URLSearchParams(window.location.search);
+    const nickname = searchParams.get("nickname");
+    if (nickname) {
+      this.setState({ nick: nickname, isNicknameSet: true });
+    }
+    const ws = new WebSocket(this.wsUrl);
 
     ws.addEventListener("open", () => {
-
+      console.log("ws connected")
       const newMessage = {
         index: 0,
         message: "Connection established",
@@ -52,7 +60,11 @@ class Wrapper extends Component {
         }));
       }
       if(newMessage.type === "roll"){
-        let messageContent = `${newMessage.attribute} + ${newMessage.skill}= ` + `<${newMessage.rolls.join("> <")}>` + `success:${newMessage.successes} ` + `compilaction:${newMessage.complication}`;
+        let focusChecked = ''
+        if (newMessage.focus){
+          focusChecked = '[F] '
+        }
+        let messageContent = `${focusChecked}${newMessage.attribute} + ${newMessage.skill}= ` + `<${newMessage.rolls.join("> <")}>` + `success:${newMessage.successes} ` + `complication:${newMessage.complication}`;
         let rollMessage = {
           nickname: newMessage.nickname,
           message: messageContent,
@@ -95,6 +107,7 @@ class Wrapper extends Component {
   setNickname = () => {
     this.setState({ nick: this.state.inputNick });
     this.setState({ isNicknameSet: true });
+    window.location.href = '?nickname=' + this.state.inputNick;
   };
 
   handleNickInput = (event) => {
@@ -128,6 +141,7 @@ class Wrapper extends Component {
         ) : (
           <p>Connecting to WebSocket...</p>
         )}
+
       </div>
     );
   }
