@@ -61,6 +61,30 @@ class CharacterSheet(Base):
     skills = relationship("Skills", back_populates="characterSheet")
     truths = relationship("Truths", secondary=character_truths_association, back_populates="characterSheet")
     
+    def __init__(self, name):
+        self.name = ""
+        self.nickname = name
+        self.description = ""
+        self.attributes = None
+        self.skills = None
+        self.actualStress = 0
+        self.maxStress = 0
+        self.actualInjuries = 0
+        self.maxInjuries = 0
+        self.fatigue = 0
+        self.armour = 0
+        self.courage = 0
+        self.languages = ""
+        self.caste = ""
+        self.resources = 0
+        self.background = ""
+        self.personalAgenda = ""
+        self.characteristic = ""
+        self.talents = []
+        self.weapons = []
+        self.equipment = []
+        self.truths = []
+    
     def to_dict(self):
         attributes_dict = self.attributes.to_dict() if self.attributes else None
 

@@ -17,7 +17,7 @@ class Wrapper extends Component {
       nick: "",
     };
   }
-  wsUrl = process.env.PROD ? 'ws://localhost:8080' : 'ws://104.248.37.81:8081' ;
+  wsUrl = 'ws://localhost:8080' ;
   componentDidMount() {
     const searchParams = new URLSearchParams(window.location.search);
     const nickname = searchParams.get("nickname");

@@ -60,7 +60,7 @@ export default class Sheet extends React.Component {
         this.handleEditFocuses = this.handleEditFocuses.bind(this);
         this.handleEditTruths = this.handleEditTruths.bind(this);
     }
-    apiURL = process.env.PROD ? 'http://localhost:8086' : 'http://104.248.37.81:8087';
+    apiURL = 'http://localhost:8086';
 
     
 
