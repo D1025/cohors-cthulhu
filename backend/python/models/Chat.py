@@ -45,7 +45,7 @@ class Chat(Base):
         self.nickname = nickname
         self.damage = damage
         self.effects = effects
-        self.rolls = rolls
+        self.rolls = str(rolls)
     
     
     def to_dict(self):
