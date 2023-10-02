@@ -33,10 +33,10 @@ class Chat(Base):
         self.nickname = nickname
         self.attributeValue = attributeValue
         self.skillValue = skillValue
-        self.focus = focus
+        self.focus = 1 if focus else 0
         self.attribute = attribute
         self.skill = skill
-        self.rolls = rolls
+        self.rolls = str(rolls)
         self.complication = complication
         self.successes = successes
         

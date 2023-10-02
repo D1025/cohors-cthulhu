@@ -84,6 +84,30 @@ class CharacterSheet(Base):
         self.weapons = []
         self.equipment = []
         self.truths = []
+        
+    def __init__(self, name, nickname, description, attributes, skills, actualStress, maxStress, actualInjuries, maxInjuries, fatigue, armour, courage, languages, caste, resources, background, personalAgenda, characteristic, talents, weapons, equipment, truths):
+        self.name = name
+        self.nickname = nickname
+        self.description = description
+        self.attributes = attributes
+        self.skills = skills
+        self.actualStress = actualStress
+        self.maxStress = maxStress
+        self.actualInjuries = actualInjuries
+        self.maxInjuries = maxInjuries
+        self.fatigue = fatigue
+        self.armour = armour
+        self.courage = courage
+        self.languages = languages
+        self.caste = caste
+        self.resources = resources
+        self.background = background
+        self.personalAgenda = personalAgenda
+        self.characteristic = characteristic
+        self.talents = talents
+        self.weapons = weapons
+        self.equipment = equipment
+        self.truths = truths
     
     def to_dict(self):
         attributes_dict = self.attributes.to_dict() if self.attributes else None
