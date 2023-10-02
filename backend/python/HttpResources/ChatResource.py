@@ -36,12 +36,12 @@ class ChatHistoryResource(Resource):
         session = Session()
         messages = session.query(Chat).order_by(Chat.timestamp.desc())[start:end+1]
 
-        responce = json.dumps([message.to_dict() for message in messages])
-
         request.setHeader('Content-Type', 'application/json')
-        request.setHeader('Access-Control-Expose-Headers', '*')
-        request.setHeader('Content-Range', f'items {start}-{end}/{len(responce)}')
+        request.setHeader('Access-Control-Expose-Headers', 'Content-Range')
+        request.setHeader('Content-Range', f'items {start}-{end}/{len(messages)}')
+
+        response = json.dumps([message.to_dict() for message in messages])
 
         session.close()
         request.setResponseCode(200)
-        return responce.encode('utf-8')
+        return response.encode('utf-8')
