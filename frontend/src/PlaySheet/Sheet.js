@@ -60,8 +60,8 @@ export default class Sheet extends React.Component {
     this.handleEditTruths = this.handleEditTruths.bind(this);
   }
   apiURL = process.env.REACT_APP_PROD === 'true'
-? "http://localhost:8086"
-: "http://104.248.37.81:8086";
+? "http://localhost:8087"
+: "http://104.248.37.81:8087";
 
   buttonClickedAttr(e) {
     const attributeMapping = {
