@@ -17,7 +17,7 @@ class Wrapper extends Component {
       nick: "",
     };
   }
-  wsUrl = 'ws://104.248.37.81:8081' ;
+  wsUrl = process.env.REACT_APP_PROD === 'true' ? 'ws://localhost:8081' : 'ws://104.248.37.81:8081';
   componentDidMount() {
     const searchParams = new URLSearchParams(window.location.search);
     const nickname = searchParams.get("nickname");
@@ -27,7 +27,7 @@ class Wrapper extends Component {
     const ws = new WebSocket(this.wsUrl);
 
     ws.addEventListener("open", () => {
-      console.log("ws connected")
+      console.log(`ws connected on ${this.wsUrl}`)
       const newMessage = {
         index: 0,
         message: "Connection established",

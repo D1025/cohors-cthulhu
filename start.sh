@@ -23,7 +23,7 @@ if [ $? -ne 0 ]; then
   echo "Błąd w instalacji zależności npm"
   exit 1
 fi
-
+cd ..
 # Go back to the base directory
 cd "$BASE_DIR"
 
