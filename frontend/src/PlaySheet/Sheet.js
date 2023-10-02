@@ -312,6 +312,7 @@ export default class Sheet extends React.Component {
   };
   handleStress = (e) => {
     let message = {
+      nickname: this.props.nickname,
       type: "stress",
       message: e.target.value,
     };

@@ -13,7 +13,7 @@ export default class Chat extends React.Component {
     };
   }
   componentDidUpdate(prevProps) {
-
+    
     if (this.props.nickname !== prevProps.nickname) {
       this.setState({ nickname: this.props.nickname });
     }
@@ -24,12 +24,36 @@ export default class Chat extends React.Component {
     }
   }
   componentDidMount() {
+    const apiURL = process.env.REACT_APP_PROD === 'true'
+? "http://localhost:8087"
+: "http://104.248.37.81:8087";
+// fetch(apiURL + `/chat`)
+// .then((response) => {
+//   if (!response.ok) {
+//     throw new Error("Network response was not ok");
+//   }
+//   console.log(response)
+//   return response.json();
+// })
+// .then((data) => {
+//   this.setState({
+//     messages: data
+//   });
+// })
+// .catch((error) => {
+//   console.error("API Error:", error); // Log any error
+//   this.setState({
+//     error: error,
+//     isLoading: false,
+//   });
+// });
+
     // Call scrollToBottom when the component first mounts to ensure initial scrolling
     this.scrollToBottom();
   }
   handleReloadComponent = () => {
     // Construct the URL with the nickname parameter
-    const url = `/your-component?nickname=${encodeURIComponent(this.props.nickname)}`;
+    const url = `/?nickname=${encodeURIComponent(this.props.nickname)}`;
 
     // Reload the page with the updated URL
     window.location.href = url;
@@ -44,7 +68,7 @@ export default class Chat extends React.Component {
     this.forceUpdate();
     const message = {
       type: "message",
-      nickname: this.state.nickname, // Use this.state.nickname
+      nickname: this.state.nickname, 
       index: this.state.messages.length,
       message: this.state.input,
     };

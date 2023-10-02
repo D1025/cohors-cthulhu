@@ -39,7 +39,7 @@ class ChatHistoryResource(Resource):
         responce = json.dumps([message.to_dict() for message in messages])
 
         request.setHeader('Content-Type', 'application/json')
-        request.setHeader('Access-Control-Expose-Headers', 'Content-Range')
+        request.setHeader('Access-Control-Expose-Headers', '*')
         request.setHeader('Content-Range', f'items {start}-{end}/{len(responce)}')
 
         session.close()
