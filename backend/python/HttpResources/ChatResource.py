@@ -13,7 +13,7 @@ class ChatHistoryResource(Resource):
     
     def render_OPTIONS(self, request):
         request.setHeader('Access-Control-Allow-Origin', '*')
-        request.setHeader('Access-Control-Allow-Methods', 'GET')
+        request.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
         request.setHeader('Access-Control-Allow-Headers', 'Content-Type')
         request.setHeader('Access-Control-Max-Age', '3600')
         request.setHeader('Content-Length', '0')
